@@ -1,0 +1,436 @@
+﻿@model HomeVM
+
+@{ ViewData["Title"] = "Index"; }
+
+
+<!-- start banner-->
+<div class="rev_slider_wrapper fullscreen custom-controls">
+
+    @foreach (var item in Model.SliderContents)
+    {
+        <div id="rev_slider_1" class="rev_slider fullscreenbanner" style="display: none;" data-version="5.4.5">
+            <ul>
+                <li data-transition="fade">
+
+                    <img src="img/banner/slide-01.jpg" alt="slide6" class="rev-slidebg">
+
+                    <!-- start layer 1 -->
+                    <div class="tp-caption alt-font font-weight-700 text-white" data-x="30" data-y="center" data-voffset="[-100,-100,-130,-140]" data-fontsize="[58,48,36,32]" data-lineheight="[60,52,40,36]" data-width="[700, 700, 500, 300]" data-whitespace="[normal, normal, normal, normal]" data-frames='[{
+                                    "delay":0,
+                                    "split":"chars",
+                                    "splitdelay":0.05,
+                                    "speed":2000,
+                                    "frame":"0",
+                                    "from":"y:[-100%];z:0;rZ:35deg;sX:1;sY:1;skX:0;skY:0;",
+                                    "mask":"x:0px;y:0px;s:inherit;e:inherit;",
+                                    "to":"o:1;",
+                                    "ease":"Power4.easeInOut"
+                                    },{
+                                    "delay":"wait",
+                                    "speed":300,
+                                    "frame":"999",
+                                    "to":"auto:auto;",
+                                    "ease":"Power3.easeInOut"}]' data-splitout="none">
+                        Love, Care your Pet
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    }
+</div>
+<!-- end banner-->
+
+
+
+<!-- start categories section -->
+<section class="no-padding-bottom">
+    <div class="container lg-container">
+        <div class="row">
+
+            @foreach (var item in Model.Category)
+            {
+             <div class="col-md-4 xs-margin-40px-bottom">
+              <div class="text-center">
+                <img src="img/content/01.jpg" class="border-radius-5" alt="" />
+                <div class="categories-content">
+                    <h5 class="no-margin-bottom"><a href="pet_care.html" class="text-extra-dark-gray">Pet Care</a></h5>
+                </div>
+               </div>
+             </div>
+             }
+        </div>
+    </div>
+</section>
+<!-- end categories section -->
+
+
+<!-- start products section -->
+<section>
+    <div class="container lg-container">
+        <div class="text-center margin-10px-bottom">
+            <h3 class="font-weight-900 font-size50 xs-font-size40 xs-margin-10px-bottom">Popular Products</h3>
+            <p class="width-50 sm-width-70 xs-width-80 mobile-width-100 center-col">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores nesciunt.</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 margin-30px-top">
+
+                <div class="product-pet">
+                    @foreach (var item in Model.Category)
+                    {
+        <div class="position-relative">
+            <a href="javascript:void(0);">
+                <img src="img/shop/01.jpg" alt="" />
+            </a>
+            <div class="product-cart">
+                <a href="javascript:void(0);">
+                    <i class="fas fa-plus"></i>
+                </a>
+                <a class="action-wishlist" href="javascript:void(0);">
+                    <i class="far fa-heart"></i>
+                </a>
+                <a href="javascript:void(0);">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+            </div>
+        </div>
+                        <div class="padding-20px-top text-center">
+                            <h5 class="margin-5px-bottom font-weight-800"><a href="shop-product-detail.html" class="font-size26 xs-font-size22 text-extra-dark-gray">Chew Toy</a></h5>
+                            <div class="text-secondary-color">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div>
+                                <span class="font-weight-700">$42.00</span>
+                            </div>
+                        </div>}
+                </div>
+            </div>
+        </div>
+      </div>               
+</section>
+<!-- end products section -->
+
+
+
+<!-- start extra section -->
+<section class="bg-theme bg-img theme-overlay" data-overlay-dark="93" data-background="img/bg/pattern.png">
+    <div class="container">
+        <div class="text-center">
+            <h3 class="text-white font-size80 sm-font-size50 xs-font-size40 no-margin-bottom">50% Sale</h3>
+            <h5 class="text-white font-size40 sm-font-size30 xs-font-size26 margin-20px-bottom sm-margin-10px-bottom">A fresh approach to shopping</h5>
+            <p class="text-white font-size20 sm-font-size18 xs-font-size16 margin-30px-bottom sm-margin-20px-bottom xs-margin-10px-bottom line-height-35 xs-line-height-30 width-75 sm-width-100 center-col">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+            <a href="javascript:void(0);" class="butn medium">Read more</a>
+        </div>
+    </div>
+</section>
+<!-- end extra section -->
+
+
+<!-- start extra section -->
+<section>
+    <div class="container lg-container">
+        @foreach (var item in Model.Category)
+        {
+            <div class="row">
+                <div class="col-lg-4 col-md-6 sm-margin-40px-bottom">
+                    <img src="img/content/04.jpg" class="border-radius-5" alt="" />
+                    <div class="padding-20px-top">
+                        <h5 class="font-weight-800">Always take care of street pet with best food.</h5>
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.</p>
+                        <a href="javascript:void(0);" class="text-theme-color">Read more<span class="fas fa-arrow-right vertical-align-middle font-size12 margin-5px-left"></span></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 sm-margin-40px-bottom">
+                    <img src="img/content/05.jpg" class="border-radius-5" alt="" />
+                    <ul class="no-margin-bottom padding-20px-top working-hour">
+                        <li>The pet expert</li>
+                        <li>Love your pet more</li>
+                        <li>Your pet, our passion</li>
+                        <li>Let’s care your pet family</li>
+                        <li>A Safe haven for pets</li>
+                        <li>What’s pet wants</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <div class="bg-img padding-30px-all" data-background="img/content/06.jpg">
+                        <h4 class="font-size24 font-weight-800">Working Hours</h4>
+                        <p>tempora incidunt ut labore et dolore aliquam quaerat voluptatem.</p>
+                        <ul class="list-style2">
+                            <li>Monday<span class="float-right text-theme-color">08:00-09:00 </span> </li>
+                            <li>Tuesday<span class="float-right text-theme-color"> 08:00-09:00</span> </li>
+                            <li>Wednesday<span class="float-right text-theme-color">09:00-11:00</span> </li>
+                            <li>Thursday<span class="float-right text-theme-color">09:00-11:00</span> </li>
+                            <li>Friday<span class="float-right text-theme-color">10:00-10:00</span> </li>
+                            <li>Sunday<span class="float-right text-theme-color">Closed</span> </li>
+                        </ul>
+                        <a href="javascript:void(0);" class="butn theme small margin-30px-top"><span class="alt-font">Contact Us</span></a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</section>
+<!-- end extra section -->
+
+
+
+<!-- start portfolio section -->
+@*<section class="no-padding">
+    <div class="container">
+        <div class="text-center margin-40px-bottom">
+            <h3 class="font-weight-900 font-size50 xs-font-size40 xs-margin-10px-bottom">Gallery</h3>
+            <p class="width-50 sm-width-70 xs-width-80 mobile-width-100 center-col">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores nesciunt.</p>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row gallery">
+            <div class="masonry-4">
+
+                <div class="masonry-item margin-15px-top">
+
+                    <img src="img/gallery/masonry-01.jpg" alt="" />
+                    <div class="masonry-item-overlay">
+                        <div class="hover-icon">
+                            <a href="img/gallery/masonry-01.jpg" class="icon1 popimg"><span class="fa fa-search"></span></a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="masonry-item margin-15px-top">
+                    <img src="img/gallery/masonry-02.jpg" alt="" />
+                    <div class="masonry-item-overlay">
+                        <div class="hover-icon">
+                            <a href="img/gallery/masonry-02.jpg" class="icon1 popimg"><span class="fa fa-search"></span></a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="masonry-item margin-15px-top">
+                    <img src="img/gallery/masonry-03.jpg" alt="" />
+                    <div class="masonry-item-overlay">
+                        <div class="hover-icon">
+                            <a href="img/gallery/masonry-03.jpg" class="icon1 popimg"><span class="fa fa-search"></span></a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="masonry-item margin-15px-top">
+                    <img src="img/gallery/masonry-04.jpg" alt="" />
+                    <div class="masonry-item-overlay">
+                        <div class="hover-icon">
+                            <a href="img/gallery/masonry-04.jpg" class="icon1 popimg"><span class="fa fa-search"></span></a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="masonry-item margin-15px-top">
+                    <img src="img/gallery/masonry-05.jpg" alt="" />
+                    <div class="masonry-item-overlay">
+                        <div class="hover-icon">
+                            <a href="img/gallery/masonry-05.jpg" class="icon1 popimg"><span class="fa fa-search"></span></a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="masonry-item margin-15px-top">
+                    <img src="img/gallery/masonry-06.jpg" alt="" />
+                    <div class="masonry-item-overlay">
+                        <div class="hover-icon">
+                            <a href="img/gallery/masonry-06.jpg" class="icon1 popimg"><span class="fa fa-search"></span></a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>*@
+<!-- end portfolio section -->
+<!-- start team section -->
+<section>
+    <div class="container lg-container">
+        <div class="text-center margin-40px-bottom">
+            <h3 class="font-weight-900 font-size50 xs-font-size40 xs-margin-10px-bottom">Our Team</h3>
+            <p class="width-50 sm-width-70 xs-width-80 mobile-width-100 center-col">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores nesciunt.</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 sm-margin-30px-bottom">
+                <div class="text-center bg-light-gray padding-40px-all border-radius-5 team-block">
+                    <img src="img/team/team-01.jpg" class="border-radius-100 width-50 border border-width-3" alt="" />
+                    <h5 class="margin-5px-bottom margin-40px-top font-size20 xs-font-size19 font-weight-800">Buckle Giarza</h5>
+                    <p class="border-bottom border-black-light padding-20px-bottom font-size18 font-weight-700">Care Taker</p>
+                    <ul class="social-icon-style2">
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-pinterest-p"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
+                        </li>
+                    </ul>
+                    <div class="team-overlay">
+                        <a href="javascript:void(0)">Hire Me</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 sm-margin-30px-bottom">
+                <div class="text-center bg-light-gray padding-40px-all border-radius-5 team-block">
+                    <img src="img/team/team-02.jpg" class="border-radius-100 width-50 border border-width-3" alt="" />
+                    <h5 class="margin-5px-bottom margin-40px-top font-size20 xs-font-size19 font-weight-800">Militon Wiafer</h5>
+                    <p class="border-bottom border-black-light padding-20px-bottom font-size18 font-weight-700">Dog Trainer</p>
+                    <ul class="social-icon-style2">
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-pinterest-p"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
+                        </li>
+                    </ul>
+                    <div class="team-overlay">
+                        <a href="javascript:void(0)">Hire Me</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mobile-margin-30px-bottom">
+                <div class="text-center bg-light-gray padding-40px-all border-radius-5 team-block">
+                    <img src="img/team/team-03.jpg" class="border-radius-100 width-50 border border-width-3" alt="" />
+                    <h5 class="margin-5px-bottom margin-40px-top font-size20 xs-font-size19 font-weight-800">Lenthi  Miloler</h5>
+                    <p class="border-bottom border-black-light padding-20px-bottom font-size18 font-weight-700">Pet Sitter</p>
+                    <ul class="social-icon-style2">
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-pinterest-p"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
+                        </li>
+                    </ul>
+                    <div class="team-overlay">
+                        <a href="javascript:void(0)">Hire Me</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 sm-margin-30px-bottom">
+                <div class="text-center bg-light-gray padding-40px-all border-radius-5 team-block">
+                    <img src="img/team/team-04.jpg" class="border-radius-100 width-50 border border-width-3" alt="" />
+                    <h5 class="margin-5px-bottom margin-40px-top font-size20 xs-font-size19 font-weight-800">Horthy Hulse</h5>
+                    <p class="border-bottom border-black-light padding-20px-bottom font-size18 font-weight-700">Care Taker</p>
+                    <ul class="social-icon-style2">
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-pinterest-p"></i></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
+                        </li>
+                    </ul>
+                    <div class="team-overlay">
+                        <a href="javascript:void(0)">Hire Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end team section -->
+<!-- start testimonial section -->
+<section class="bg-img cover-background padding-100px-tb" data-overlay-dark="0" data-background="img/testmonials/01.jpg">
+    <div class="container lg-container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="bg-light-gray padding-60px-lr padding-70px-tb xs-padding-40px-all border-radius-5 mobile-text-center owl-theme owl-carousel" id="testmonials-carousel">
+                    <div class="row align-items-center">
+                        @foreach (var item in Model.Team)
+                        {
+                        <div class=" team">
+                            <div class="col-sm-3 mobile-margin-25px-bottom">
+                                <img src="img/testmonials/t-1.jpg" class="border-radius-50" alt="" />
+                            </div>
+                            <div class="col-sm-9">
+                                <h4>Ericka Dash</h4>
+                                <p class="no-margin-bottom">"Dxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis."</p>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end testimonial section -->
+<!-- start blog section -->
+<section class="no-padding-bottom">
+    <div class="container lg-container">
+
+        <div class="text-center margin-40px-bottom">
+            <h3 class="font-weight-900 font-size50 xs-font-size40 xs-margin-10px-bottom">Latest News</h3>
+            <p class="width-50 sm-width-70 xs-width-80 mobile-width-100 center-col">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores nesciunt.</p>
+        </div>
+
+        <div class="row">
+            <div class="blog">
+                @foreach (var item in Model.Blogs)
+                {
+                <div class="col-lg-4 sm-margin-50px-bottom xs-margin-40px-bottom">
+                    <div class="blog-block overflow-hidden">
+                        <div class="blog-img position-relative">
+                            <img src="img/blog/blog-01.jpg" alt="" />
+                            <div class="blog-date text-white text-center padding-15px-top z-index-1">
+                                <span class="font-size20 md-font-size18">21 Jan</span>
+                            </div>
+                        </div>
+                        <div class="padding-20px-top">
+                            <ul class="d-flex font-size13">
+                                <li>
+                                    <i class="far fa-folder"></i>
+                                    <a href="javascript:void(0)">Pet Grooming</a>,
+                                    <a href="javascript:void(0)">Pet Sitting</a>
+                                </li>
+                                <li class="margin-20px-left"><i class="fa fa-comments"></i> 0 comment</li>
+                            </ul>
+                            <h5><a href="gallery-blog-post.html" class="text-extra-dark-gray">The ultimate guide to pet-friendly events</a></h5>
+                            <a href="gallery-blog-post.html" class="text-extra-dark-gray">Read more<i class="fas fa-arrow-right margin-5px-left font-size12 vertical-align-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end blog section -->

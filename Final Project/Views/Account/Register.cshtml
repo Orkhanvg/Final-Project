@@ -1,0 +1,96 @@
+﻿@model RegisterVM
+
+@{ ViewData["Title"] = "Register"; }
+<!--====== Register Part Start ======-->
+
+<section class="register-area pt-10">
+    <div class="container-fluid custom-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="login-register-wrapper mt-30">
+                    <h4 class="Paw-store">Creat New Account</h4>
+                    <p class="mt-10">Already have an account? <a asp-controller="account" asp-action="login" accesskey="login">Log in instead!</a></p>
+
+                    <form method="post">
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                            <input asp-for="FirstName" class="form-control" placeholder="First Name">
+                            <span style="position: absolute; top:35px" class="text-danger" asp-validation-for="FirstName"></span>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                            <input asp-for="LastName" class="form-control" placeholder="Last Name">
+                            <span style="position: absolute; top:35px" class="text-danger" asp-validation-for="LastName"></span>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                            <input asp-for="Email" class="form-control" placeholder="Email Address">
+                            <span style="position: absolute; top:35px" class="text-danger" asp-validation-for="Email"></span>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                            <input asp-for="Username" class="form-control" placeholder="Username">
+                            <span style="position: absolute; top:35px" class="text-danger" asp-validation-for="Username"></span>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                            <input asp-for="Password" class="form-control" placeholder="Password">
+                            <span style="position: absolute; top:35px" class="text-danger" asp-validation-for="Password"></span>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                            <input asp-for="RepeatPassword" class="form-control" placeholder="Confirm Password">
+                            <span style="position: absolute; top:35px" class="text-danger" asp-validation-for="RepeatPassword"></span>
+                        </div>
+
+                        <div class="custom-checkbox mt-30">
+                            <input type="checkbox" id="account-1">
+                            <label for="account-1"></label>
+                            <p>Receive Offers From Our Partners</p>
+                        </div>
+                        <div class="custom-checkbox mt-30">
+                            <input type="checkbox" id="account-2">
+                            <label for="account-2"></label>
+                            <p>Sign Up For Our Newsletter <br> Subscribe To Our Newsletters Now And Stay Up-To-Date With New Collections, The Latest Lookbooks And Exclusive Offers..</p>
+                        </div>
+                        <div class="single-form">
+                            <button class="main-btn main-btn-2">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--====== Register Part Ends ======-->
