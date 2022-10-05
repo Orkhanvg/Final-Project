@@ -13,6 +13,7 @@ namespace Final_Project.ViewModels
         public double Price { get; set; }
         public int ProductCount { get; set; }
         public string Desc { get; set; }
-
+        public string Category { get; set; }
+        public int CategoryId { get; set; }
     }
 }

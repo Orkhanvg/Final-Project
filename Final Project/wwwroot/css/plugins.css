@@ -1,0 +1,44 @@
+/*-----------------------------------------------------------------------------------
+
+    Theme Name: Paw - Pet Adoption, Care and Shop Responsive Template
+    Description: Pet Adoption, Care and Shop Responsive Template
+    Author: Chitrakoot Web
+    Version: 1.0
+
+-----------------------------------------------------------------------------------*/
+
+/* ----------------------------------------------------------------
+			[ All CSS Plugins & Default Classes File ]
+-----------------------------------------------------------------*/
+
+/* == bootstrap == */
+@import url("plugins/bootstrap.min.css");
+
+/* == fontawesome icon font == */
+@import url("plugins/fontawesome-all.min.css");
+
+@import url("plugins/themify-icons.css");
+
+/* == magnific-popup == */
+@import url("plugins/magnific-popup.css");
+
+/* == date-picker == */
+@import url("plugins/datepicker.css");
+
+/* == clock-picker == */
+@import url("plugins/clockpicker.css");
+
+/* == owl.carousel == */
+@import url("plugins/owl.carousel.min.css");
+
+/* == zoom css == */
+@import url("plugins/xzoom.css");
+
+/* == default classes == */
+@import url("plugins/default.css");
+
+/* == navigation == */
+@import url("plugins/nav-menu.css");
+
+/* == contact form classes == */
+@import url("plugins/mailform.css");

@@ -1,6 +1,8 @@
 ﻿using Final_Project.DAL;
+using Final_Project.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +10,7 @@ using System.Threading.Tasks;
 
 namespace Final_Project.Controllers
 {
-    public class SubscribeController : Controller
-    {
+   
         public class SubscribeController : Controller
         {
             private readonly UserManager<AppUser> _userManager;
@@ -28,10 +29,10 @@ namespace Final_Project.Controllers
             public async Task<IActionResult> Form([FromForm] Subscriber subs)
             {
                 Subscriber subscribe = new Subscriber();
-                List<Subscriber> subscribers = await _context.Subscribers.ToListAsync();
+                List<Subscriber> subscribers = await  _context.Subscribers.ToListAsync();
                 if (string.IsNullOrEmpty(subs.Email))
                 {
-                    return Ok("Bos qoyma");
+                    return Ok(" Do not leave it empty");
                 }
                 else
                 {
@@ -39,11 +40,12 @@ namespace Final_Project.Controllers
                     {
                         if (item.Email == subs.Email)
                         {
-                            return Ok("Bu hesab artiq melumatlar bazamizda movcuddur");
+                            return Ok("This account is already available in our database");
                         }
                         else
                         {
                             subscribe.Email = subs.Email;
+
                             _context.Subscribers.Add(subscribe);
                             _context.SaveChanges();
                         }
@@ -55,4 +57,4 @@ namespace Final_Project.Controllers
             }
         }
     }
-}
+

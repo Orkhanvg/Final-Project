@@ -1,4 +1,5 @@
 ﻿using Final_Project.DAL;
+using Final_Project.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

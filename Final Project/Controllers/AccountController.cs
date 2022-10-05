@@ -1,5 +1,6 @@
 ﻿using Final_Project.DAL;
 using Final_Project.Helpers;
+using Final_Project.Models;
 using Final_Project.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Final_Project.Controllers
 {
@@ -26,7 +28,7 @@ namespace Final_Project.Controllers
             _userManager = userManager;
             _rolemanager = roleManager;
             _signInManager = signInManager;
-            _config = _config;
+            _config = config;
             _context = context;
 
 
@@ -70,7 +72,7 @@ namespace Final_Project.Controllers
 
             await _userManager.AddToRoleAsync(user, UserRoles.Member.ToString());
 
-            //string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             Random rand = new Random();
             int minValue = 100000;
             int maxValue = 999999;
@@ -105,7 +107,7 @@ namespace Final_Project.Controllers
             AppUser appUser = await _userManager.FindByEmailAsync(login.Email);
             if (appUser == null)
             {
-                ModelState.AddModelError("", "email or  password is invalid!");
+                ModelState.AddModelError("", "Email or  Password is not valid!");
                 return View(login);
             }
             var roles = await _userManager.GetRolesAsync(appUser);
@@ -132,10 +134,10 @@ namespace Final_Project.Controllers
                     {
                         await _signInManager.SignOutAsync();
 
-                        TempData["Banned"] = "Hesabiniz banlanmisdir";
+                        TempData["Banned"] = "Your account has been disabled";
                         return View(login);
                     }
-                    else if (appUser.EmailConfirmed == true && item.ToLower() == "member")
+                    else if (appUser.EmailConfirmed == true && item.ToLower() == "Member")
                     {
                         await _signInManager.SignInAsync(appUser, true);
                         return RedirectToAction("Index", "home");
@@ -152,7 +154,7 @@ namespace Final_Project.Controllers
             ViewBag.Email = appUser.EmailConfirmed;
             TempData["User Create Time"] = appUser.UserCreateTime;
             TempData["IsConfirmTime"] = appUser.ConfirmMailTime;
-            TempData["QalanVaxt"] = $"{m} deq {s}san erzinde mailinizi tesdiqleyin";
+            TempData["QalanVaxt"] = $"{m} minute {s}second verify your email";
 
             if (result.IsLockedOut)
             {
@@ -160,17 +162,17 @@ namespace Final_Project.Controllers
                 var timeSpanFromMinutes = TimeSpan.FromMinutes(timeSpan.TotalMinutes);
                 int mm = timeSpanFromMinutes.Minutes;
                 int ss = timeSpanFromMinutes.Seconds;
-                TempData["Error"] = $"{mm} deq {ss} saniye sonra daxil ola bilersiniz";
+                TempData["Error"] = $"{mm} minute {ss}second after you can login";
                 return View(login);
             }
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("", "email or  password is invalid!");
+                ModelState.AddModelError("", "Email or  password is not valid!");
                 return View(login);
             }
             if (result == null)
             {
-                ModelState.AddModelError("", "email or  password is invalid!");
+                ModelState.AddModelError("", "Email or  password is not valid!");
                 return View(login);
             }
 

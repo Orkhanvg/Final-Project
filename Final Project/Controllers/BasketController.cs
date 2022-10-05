@@ -1,7 +1,10 @@
 ﻿using Final_Project.DAL;
+using Final_Project.Models;
 using Final_Project.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,12 +16,12 @@ namespace Final_Project.Controllers
     public class BasketController:Controller
     {
         private readonly AppDbContext _context;
-        private readonly UserManager<AppUser> _UserManager;
+        private readonly UserManager<AppUser> _userManager;
 
         public BasketController (AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
-            _UserManager = userManager;
+            _userManager = userManager;
         }
 
         string userName = "";
@@ -106,8 +109,7 @@ namespace Final_Project.Controllers
                 products = JsonConvert.DeserializeObject<List<BasketVM>>(basket);
                 foreach (var item in products)
                 {
-                    Product dbProduct = _context.Products
-                    .Include(c => c.Category)
+                    Product dbProduct = _context.Products.Include(c => c.Category)
                     .Include(i => i.ProductImages)
                     .FirstOrDefault(p => p.Id == item.Id);
                     if (dbProduct.DiscountPercent > 0)
@@ -302,4 +304,4 @@ namespace Final_Project.Controllers
         }
     }
 }
-}
+

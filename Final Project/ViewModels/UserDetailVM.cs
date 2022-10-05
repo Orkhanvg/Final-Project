@@ -10,7 +10,7 @@ namespace Final_Project.ViewModels
     public class UserDetailVM
     {
         public int Id { get; set; }
-        public AppUser AppUser { get; set; }
+        
         public List<Order> orders { get; set; }
     }
 }

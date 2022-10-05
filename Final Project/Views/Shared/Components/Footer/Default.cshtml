@@ -1,4 +1,5 @@
-﻿  <!-- start footer section -->
+﻿@model Bio
+<!-- start footer section -->
 <footer>
     <div class="container lg-container">
         <div class="row margin-80px-bottom md-margin-50px-bottom sm-margin-40px-bottom">
@@ -47,21 +48,17 @@
             </div>
 
             <div class="col-lg-5 col-sm-6 col-12">
-                <h3>About</h3>
-                <p class="margin-30px-bottom">Etiam rhoncu sit amet adip scing simply thin sed ipsum dolor sit amet adip dine scing not avilable in the martket lorem ipsum sem neque.</p>
-                <div class="newsletter">
-                    <input type="email" placeholder="Enter your email...">
-                    <a href="javascript:void(0)" class="butn subscribe"><span>Subscribe</span></a>
+                    <a @await Component.InvokeAsync("Subscribe")</a>
                 </div>
             </div>
         </div>
-    </div>
+
 
     <div class="padding-20px-tb border-top border-color-light-black">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <p class="xs-font-size13 no-margin-bottom text-extra-light-gray sm-text-center">&copy; 2020 Paw is Powered by Chitrakoot Web</p>
+                    <p class="xs-font-size13 no-margin-bottom text-extra-light-gray sm-text-center">&copy; Made by Orkhan</p>
                 </div>
             </div>
         </div>

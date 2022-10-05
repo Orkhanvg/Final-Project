@@ -1,5 +1,56 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<BasketVM>
+@{ Layout = null;
+    int count = 0;
+    double price = 0;
+    double subTotal = 0;
+    double shipping = 0;
+    double tax = 0;
+    double total = 0;
+@foreach (var item in Model)
+{
+    count = item.ProductCount;
+    price = item.Price;
+    subTotal += (price * count);
+    if (subTotal / 100 < 3)
+    {
+        shipping = 3;
+    }
+    else
+    {
+        shipping = subTotal / 100;
+    }
+    tax = subTotal / 20;
+    total = tax + shipping + subTotal;
+} }
+
+<!-- start atribute navigation -->
+<div class="attr-nav sm-no-margin sm-margin-70px-right xs-margin-65px-right">
+    <ul>
+        <li class="dropdown sm-margin-20px-right">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge bg-theme">3</span>
+            </a>
+            <ul class="dropdown-menu cart-list">
+                @foreach (var item in Model)
+                {
+                    <li>
+
+                        <a href="#" class="photo"><img src="~/assets/images/product/@item.ImageUrl" class="cart-thumb" alt="" /></a>
+                        <h6><a href="#">@item.Name </a></h6>
+                        <p>2x - <span class="price">$@item.Price</span></p>
+                    </li>
+
+
+                                    <li class="total bg-theme">
+                                        <span class="pull-left"><strong>Total</strong>: $233.31</span>
+                                        <a href="#" class="butn small btn-cart white"><span>View Cart</span></a>
+                                    </li>
+                                }
+
+            </ul>
+        </li>
+        <li class="search"><a href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+    </ul>
+</div>
+<!-- end atribute navigation -->

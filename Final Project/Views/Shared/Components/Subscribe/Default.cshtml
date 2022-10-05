@@ -1,32 +1,42 @@
-﻿ <!-- start categories section -->
-<section class="no-padding-bottom">
-    <div class="container lg-container">
-        <div class="row">
-            <div class="col-md-4 xs-margin-40px-bottom">
-                <div class="text-center">
-                    <img src="img/content/01.jpg" class="border-radius-5" alt="" />
-                    <div class="categories-content">
-                        <h5 class="no-margin-bottom"><a href="pet_care.html" class="text-extra-dark-gray">Pet Care</a></h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 xs-margin-40px-bottom">
-                <div class="text-center">
-                    <img src="img/content/02.jpg" class="border-radius-5" alt="" />
-                    <div class="categories-content">
-                        <h5 class="no-margin-bottom"><a href="pet_shop.html" class="text-extra-dark-gray">Pet Shop</a></h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="text-center">
-                    <img src="img/content/03.jpg" class="border-radius-5" alt="" />
-                    <div class="categories-content">
-                        <h5 class="no-margin-bottom"><a href="vet_tips.html" class="text-extra-dark-gray">Vet Tips</a></h5>
-                    </div>
-                </div>
-            </div>
-        </div>
+﻿@model Subscriber
+<div class="col-lg-5 col-sm-6 col-12">
+    <h3>About</h3>
+    <p class="margin-30px-bottom">Etiam rhoncu sit amet adip scing simply thin sed ipsum dolor sit amet adip dine scing not avilable in the martket lorem ipsum sem neque.</p>
+    <div class="newsletter">
+        <input type="email" asp-for="Email" placeholder="Enter your email...">
+        <a class="butn subscribe" asp-controller="subscribe" asp-action="form"><span>Subscribe</span></a>
     </div>
-</section>
-<!-- end categories section -->
+</div>
+
+
+<script>
+    let Btn = document.getElementById("send")
+    let email = document.getElementById("email")
+    Btn.onclick = function (ev) {
+        ev.preventDefault();
+        console.log(email.value)
+
+        var body = {
+            Email: email.value
+        }
+
+        axios({
+            method: 'post',
+            url: '/subscribe/form',
+            data: body
+        })
+            .then(function (response) {
+                swal({
+                    title: "Thanks for Subscription !",
+                    text: "We will send you all the news!",
+                    icon: "success",
+                });
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>

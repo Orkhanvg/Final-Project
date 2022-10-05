@@ -1,6 +1,8 @@
 ﻿using Final_Project.DAL;
+using Final_Project.Models;
 using Final_Project.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +33,9 @@ namespace Final_Project.Controllers
                 .ToListAsync();
             homeVM.ProductImages = await _context.ProductImages.Include(i => i.Product).ToListAsync();
 
-            var newProduct = products.Where(p => p.NewArrival).ToList();    /*editable*/
-            var isFeatured = products.Where(p => p.IsFeatured).ToList();    /*editable*/
-            var bestSeller = products.Where(p => p.BestSeller).ToList();    /*editable*/
+            var newProduct = products.Where(p => p.NewArrival).ToList();   
+            var isFeatured = products.Where(p => p.IsFeatured).ToList();    
+            var bestSeller = products.Where(p => p.BestSeller).ToList();    
 
             ViewBag.newProduct = newProduct;
             ViewBag.isFeatured = isFeatured;
@@ -42,16 +44,7 @@ namespace Final_Project.Controllers
         }
 
 
-        public IActionResult Shop(int page = 1, int take = 12)
-        {
-
-            List<Product> product = _context.Products.Where(p => p.IsDeleted != true)
-                .Include(p => p.Category).Where(c => c.IsDeleted != true)
-                .Include(pi => pi.ProductImages).Skip((page - 1) * take).Take(take).ToList();
-            PaginationVM<Product> paginationVM = new PaginationVM<Product>(product, PageCount(take), page);
-
-            return View(paginationVM);
-        }
+       
 
         private int PageCount(int take)
         {

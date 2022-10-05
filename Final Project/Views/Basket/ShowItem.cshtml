@@ -1,0 +1,243 @@
+﻿@model List<BasketVM>
+@{ 
+
+    ViewData["Title"] = "ShowItem";
+
+ }
+
+
+ 
+<div style="position:relative">
+    <div style="position:absolute">
+        @if (TempData["success"] != null)
+        {
+<div class="alert alert-success  sale">
+    @TempData["success"]
+</div>}
+        @if (TempData["failCount"] != null)
+        {
+<div class="alert alert-danger sale">
+    @TempData["failCount"]
+</div>}
+        @if (TempData["fail"] != null)
+        {
+<div class="alert alert-danger sale">
+    @TempData["fail"]
+</div>}
+    </div>
+</div>
+
+
+
+<!-- start page title section -->
+<section class="page-title-section bg-img cover-background" data-overlay-dark="7" data-background="img/bg/page-title.jpg">
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+            <h1>Shop Cart</h1>
+        </div>
+            <div class="col-md-12">
+             <ul>
+               <li><a href="home-1.html">Home</a></li>
+               <li><a href="javascript:void(0)">Shop Cart</a></li>
+             </ul>
+         </div>
+         </div>
+    </div>
+</section>
+<!-- end page title section -->
+
+
+
+
+
+<!-- start cart table section -->
+<section>
+    <div class="container lg-container">
+
+        <div class="row">
+
+            <!-- start product table -->
+            <div class="col-12 shop-cart-table">
+                <table class="table shop-cart text-center">
+                    <colgroup>
+                        <col class="width-100px">
+                        <col>
+                        <col class="width-1px">
+                        <col>
+                        <col class="width-120px">
+                        <col class="width-1px">
+                    </colgroup>
+
+                    <thead>
+                        <tr>
+                            <th class="first"></th>
+                            <th class="text-left text-uppercase font-weight-500">Product</th>
+                            <th class="text-left text-uppercase font-weight-500">Price</th>
+                            <th class="text-center text-uppercase font-weight-500">Qty</th>
+                            <th class="text-left text-uppercase font-weight-500">Sub Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                    <tr>
+                        <td class="product-thumbnail text-left">
+                            <a href="javascript:void(0)" class="display-inline-block width-70px"><img src="~/assets/images/product/@item.ImageUrl" alt="" class="width-70px" /></a>
+                        </td>
+                        <td class="text-left">
+                            <a href="single-product.html">@item.Name</a>
+                            <span class="text-uppercase display-block">SKU: 190397</span>
+                        </td>
+                        <td class="text-left">
+                            <span class="price">€@item.Price</span>
+                        </td>
+                        <td class="product-quantity">
+                            <a asp-controller="basket" asp-route-id="@item.Id" asp-action="min" type="button" class="sub btn btn-default"><i class="fal fa-minus"></i></a>
+                            <input type="text" value="@item.ProductCount" />
+                            <a asp-controller="basket" asp-route-id="@item.Id" asp-action="plus" type="button" class="add btn btn-default"><i class="fal fa-plus"></i></a>
+                        </td>
+
+
+                        <td>
+                            <div class="product-total text-left">
+                                <span class="total-amount">€@(item.Price*item.ProductCount)</span>
+                            </div>
+                        </td>
+
+
+                        <td class="product-remove text-center">
+                            <div class="product-delete">
+                                <a asp-controller="basket" asp-route-id="@item.Id" asp-action="removeItem"><i class="fal fa-trash-alt"></i></a>
+                            </div>
+                            @*<a href="javascript:void(0)"><i class="fas fa-times"></i></a>*@
+                        </td>
+                    </tr> 
+                         }
+                    </tbody>
+                </table>
+            </div>
+            <!-- end product table -->
+            <!-- start button set -->
+            @*<div class="col-12 border-bottom border-top padding-40px-tb sm-padding-20px-tb sm-margin-20px-bottom xs-margin-15px-bottom">
+                
+                <div class=""butn small margin-5px-bottom" href="javascript:void(0)"><span>Empty Cart</span>">
+                    <a asp-controller="basket" asp-route-id="@item.Id" asp-action="removeItem"><i class="fal fa-trash-alt"></i></a>
+                </div>
+                <a class="butn small float-right margin-30px-left margin-5px-bottom" href="shop-product-grid.html"><span>Continue Shopping</span></a>
+                <a class="butn small secondary float-right" href="javascript:void(0)"><span>Update Shopping Cart</span></a>
+            </div>*@
+            <!-- end button set -->
+            <!-- start total block set -->
+            <div class="col-12 cart-total padding-40px-top sm-padding-20px-tb">
+                <div class="row">
+
+                    <div class="col-lg-5 col-md-5 xs-margin-30px-bottom">
+                        <div class="accordion" id="accordionOne">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Coupon Code
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOne">
+                                    <div class="card-body">
+                                        <form action="#">
+
+                                            <input type="text" placeholder="Enter Your Coupon code">
+                                            <a class="butn small" href="javascript:void(0)"><span>Apply Code</span></a>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Calculate Shipping
+                                            <span class="cart-amount">
+                                                @if (@Model.Sum(p => p.Price * p.ProductCount) / 100 > 3)
+                                                {
+                                                    <span>€<span id=shippingCost>@(Model.Sum(p=>p.Price*p.ProductCount)/100)</span></span> 
+                                                }
+                                                 
+                                                else
+                                                {
+                                                 <span>€3</span>
+                                                }
+                                            </span>
+                                        </button>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 offset-lg-1 col-md-7 offset-md-0">
+                        <table class="table cart-sub-total">
+
+                            <tbody>
+                                <tr>
+                                    <th class="text-right no-padding-right text-uppercase">Subtotal</th>
+                                    <span id="subTotal" class="cart-amount">€@Model.Sum(p=>p.Price*p.ProductCount)</span>
+                                </tr>
+
+
+
+                                <tr>
+                                    <th class="text-right no-padding-right text-uppercase">Shipping and Handling</th>
+                                    <span class="cart-amount">
+
+
+                                        @if (@Model.Sum(p => p.Price * p.ProductCount) / 100 > 3)
+                                        {
+                                         <span>€<span id=shippingCost>@(Model.Sum(p=>p.Price*p.ProductCount)/100)</span></span>
+                                         
+                                        }
+
+                                        else
+
+                                        {
+                                        <span>€3</span>
+                                        }
+                                </tr>
+
+                                <tr>
+                                    <td class="no-padding-right xs-no-padding" colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr class="total">
+                                    <th class="text-uppercase text-right no-padding-right xs-no-padding">Order Total</th>
+                                    <td class="text-uppercase text-right no-padding-right xs-no-padding">
+                                        @if (@Model.Sum(p => p.Price * p.ProductCount) / 100 > 3)
+                                        {
+                                            <span>€<span id="totalSumPlus3">@(Model.Sum(p=>p.Price*p.ProductCount)+(Model.Sum(p=>p.Price*p.ProductCount)/100))</span></span> 
+                                         }
+                                                
+                                        else
+                                        {
+                                        <span>€<span id="totalSumPlusMax">@(Model.Sum(p=>p.Price*p.ProductCount)+3)</span></span>
+                                         }
+                                 </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-padding-right xs-no-padding" colspan="2">
+                                        <hr class="no-margin-bottom">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a class="butn medium secondary float-right" "main-btn"asp-action="checkout"><span>Proceed to Checkout</span></a>
+                    </div>
+                </div>
+            </div>
+            <!-- end total block set -->
+        </div>
+    </div>
+</section>
+<!-- end cart table section -->

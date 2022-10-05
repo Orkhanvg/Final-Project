@@ -1,4 +1,6 @@
 ﻿using Final_Project.DAL;
+using Final_Project.Models;
+using Final_Project.Services;
 using Final_Project.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +16,7 @@ namespace Final_Project.ViewComponents
     {
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
-        private readonly ICategory category;
+        private readonly ICategory _category;
 
         public HeaderViewComponent(AppDbContext context, ICategory category, UserManager<AppUser> userManager)
         {
@@ -23,52 +25,50 @@ namespace Final_Project.ViewComponents
             _userManager = userManager;
         }
 
+
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            if(User != null)
+            if (User != null)
             {
                 if (User.Identity.IsAuthenticated)
                 {
-                   
                     AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
                     ViewBag.User = user.FullName;
                 }
-                else
-                {
-                    return View();
-                }
-
-                ViewBag.BasketCount = 0;
-                ViewBag.TotalPrice = 0;
-                double totalPrice = 0;
-                double total = 0;
-                int totalCount = 0;
-                string userName = "";
-                if (User.Identity.IsAuthenticated)
-                {
-                    userName = User.Identity.Name;
-                }
-                string basket = Request.Cookies[$"{userName}basket"];
-                if (basket != null)
-                {
-                    List<BasketVM> products = JsonConvert.DeserializeObject<List<BasketVM>>(basket);
-                    //ViewBag.BasketCount =products.Count();
-                    foreach (var item in products)
-                    {
-                        totalPrice += item.Price * item.ProductCount;
-                        totalCount += item.ProductCount;
-                        total += totalPrice;
-                    }
-                }
-                ViewBag.Categories = _category.Category();
-                ViewBag.BasketCount = totalCount;
-                ViewBag.TotalPrice = totalPrice;
-                Bio bio = _context.Bios.FirstOrDefault();
-
-
-
             }
+            else
+            {
+                return View();
+            }
+
+            ViewBag.BasketCount = 0;
+            ViewBag.TotalPrice = 0;
+            double totalPrice = 0;
+            double total = 0;
+            int totalCount = 0;
+            string userName = "";
+            if (User.Identity.IsAuthenticated)
+            {
+                userName = User.Identity.Name;
+            }
+            string basket = Request.Cookies[$"{userName}basket"];
+            if (basket != null)
+            {
+                List<BasketVM> products = JsonConvert.DeserializeObject<List<BasketVM>>(basket);
+                //ViewBag.BasketCount =products.Count();
+                foreach (var item in products)
+                {
+                    totalPrice += item.Price * item.ProductCount;
+                    totalCount += item.ProductCount;
+                    total += totalPrice;
+                }
+            }
+            ViewBag.Categories = _category.Category();
+            ViewBag.BasketCount = totalCount;
+            ViewBag.TotalPrice = totalPrice;
+            Bio bio = _context.Bios.FirstOrDefault();
+            return View(await Task.FromResult(bio));
         }
-            
     }
 }
+

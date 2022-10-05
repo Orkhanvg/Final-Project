@@ -2,6 +2,7 @@
 using Final_Project.Models;
 using Final_Project.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,11 @@ namespace Final_Project.ViewComponents
 {
     public class BasketProductViewComponent : ViewComponent
     {
-        private readonly AppDbContext _contect;
+        private readonly AppDbContext _context;
 
-        public BasketProductViewComponent(AppDbContext)
+        public BasketProductViewComponent(AppDbContext context)
         {
-            _context = context:
+            _context = context;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
