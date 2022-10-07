@@ -42,7 +42,12 @@ namespace Final_Project.Controllers
             }
             return View();
         }
+        public IActionResult Register()
+        {
+            ViewBag.brand = _context.Brands.Where(b => b.IsDeleted != true).ToList();
 
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
 

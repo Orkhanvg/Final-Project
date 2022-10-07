@@ -1,6 +1,7 @@
 ﻿using Final_Project.DAL;
 using Final_Project.Models;
 using Final_Project.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Final_Project.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public readonly AppDbContext _context;
@@ -18,6 +20,7 @@ namespace Final_Project.Controllers
         {
             _context = context;
         }
+       
         public async Task<IActionResult> Index()
         {
             var products = await _context.Products.Include(p => p.ProductImages).ToListAsync();

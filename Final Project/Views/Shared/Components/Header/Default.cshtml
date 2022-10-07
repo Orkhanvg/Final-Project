@@ -36,40 +36,39 @@
             <li><i class="fas fa-sign-in"></i><a href="login.html" a></a></li>
             <li><i class="fa-solid fa-user-plus"><a href="sign_up.html" a></a></i></li>
         }*@
-                            <div class="dropdown">
-                                @*<button type="button" id="setting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Setting <i class="icon ion-chevron-down"></i></button>
-
-                                <ul class="dropdown-menu" aria-labelledby="setting">*@
+                            <div class="User">
 
 
-                                    
-                                    @if (User.Identity.IsAuthenticated)
+                                @if (User.Identity.IsAuthenticated)
 
-                                    {
-                                     <li><a href="my-account.html"></a></li> 
-                                    }
+                                {
+                                <li><a asp-controller="index" asp-action="home">Sign In</a></li>
 
-                                    else
+                            }
 
-                                    {
-                                    <li><a href="my-account.html">My account</a></li>
-                                    }
-                                    <li><a asp-controller="basket" asp-action="checkout">Checkout</a></li>
-                                    @if (!User.Identity.IsAuthenticated)
+                            else
 
-                                    {
-                                     <li><a asp-controller="account" asp-action="login">Sign in</a></li> 
-                                    }
+                            {
+                                <li><a href="my-account.html">My account</a></li>
+                            }
+                                <li><a asp-controller="basket" asp-action="checkout">Checkout</a></li>
+                                @if (!User.Identity.IsAuthenticated)
 
-                                    else
+                                {
 
-                                    {
+                                    <li><a asp-controller="account" asp-action="login">Sign In</a></li>
+
+                                }
+
+                                else
+
+                                {
                                     <li><a asp-controller="account" asp-action="logout">Sign out</a></li>
-                                    }
+                                }
 
-                                </ul>
-                            </div>
-                        </ul>
+                            </ul>
+                    </div>
+                        
                     </div>
                 </div>
             </div>

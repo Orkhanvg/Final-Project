@@ -33,18 +33,19 @@ namespace Final_Project.Helpers
         //confirm email 
             public bool SendEmail(string email, string confirmation)
             {
-                MailMessage message = new MailMessage();
-                message.From = new MailAddress(_email);
-                message.To.Add(new MailAddress(email));
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(_email);
+            message.To.Add(new MailAddress(email));
 
-                message.Subject = "Confirm Email";
-                message.Body = confirmation;
-                message.IsBodyHtml = true;
 
-                SmtpClient client = new SmtpClient();
+            message.Subject = "Confirm Email";
+            message.Body = confirmation;
+            message.IsBodyHtml = true;
+
+            SmtpClient client = new SmtpClient();
                 client.Credentials = new System.Net.NetworkCredential(_email, _password);
 
-                client.Host = "smtp.gmail.com";
+                client.Host = "smtp.mail.ru";
                 client.Port = 587;
                 client.EnableSsl = true;
                 try

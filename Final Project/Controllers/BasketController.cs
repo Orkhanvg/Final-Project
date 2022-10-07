@@ -30,7 +30,7 @@ namespace Final_Project.Controllers
         {
             return View();
         }
-
+        [HttpPost]
         public async Task <IActionResult> AddItem (int? id)
         {
             double price = 0;

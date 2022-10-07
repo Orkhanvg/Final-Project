@@ -6,7 +6,7 @@
 
 <!-- login start -->
 
-<form action="action_page.php" method="post">
+<form  method="post">
 
     <div class="container">
         <label for="uname"><b>Username</b></label>
@@ -19,12 +19,15 @@
         <label>
             <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>
+         <div class="custom-checkbox mt-80">
+        <label for="account"></label>
+         <p class="mt-lg-n4">No account? <a asp-action="Register">Create a new account.</a></p>
+    </div>
     </div>
 
-    <div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancel</button>
+    @*<div class="container">
         <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
+    </div>*@
 
 
     @if (ViewBag.Role == "Ban")
@@ -45,18 +48,14 @@
     {
         <span style="position: absolute; z-index:1000;width: 400px; bottom: 205px;left: 50px" id="errMsg">
             @TempData["Error"]
-        </span>}
-    <div class="custom-checkbox mt-30">
-        <input type="checkbox" id="account">
-        <label for="account"></label>
-        <p>Remember me</p>
-    </div>
-    <div class="single-form">
-        <button type="submit" class="main-btn main-btn-2">Login</button>
-    </div>
+        </span>
+    }
+
+   
+   
 </form>
-<p class="mt-20"><a href="#">Forgot your password?</a></p>
-<p class="mt-10">No account? <a asp-controller="Register" asp-action="Index">Create a new account.</a></p>
+@*<p class="mt-20"><a href="#">Forgot your password?</a></p>*@
+
 
 
 <!-- login finished -->

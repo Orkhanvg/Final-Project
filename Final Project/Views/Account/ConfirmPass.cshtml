@@ -21,7 +21,7 @@
                             <input asp-for="Password" class="form-control" placeholder="Password">
                             <span style="position: absolute; top:35px" class="text-danger" asp-validation-for="Password"></span>
                         </div>
-                        <button class="mt-10 btn btn-success" asp-action="confirmpassword">Confirm</button>
+                        <button class="mt-10 btn btn-success" asp-action="confirmpass">Confirm</button>
                     </form>
                     @if (TempData["WrongPassword"] != null)
                     {
