@@ -92,7 +92,7 @@ namespace Final_Project.Controllers
                 Count = count,
             };
 
-            //return Ok(obj);
+           
             return RedirectToAction("index", "home");
         }
         public IActionResult ShowItem()
@@ -236,7 +236,9 @@ namespace Final_Project.Controllers
                     orderItem.ProductId = dbProduct.Id;
                     orderItem.Count = basketProduct.ProductCount;
                     orderItem.OrderId = order.Id;
-                    orderItem.TotalPrice = dbProduct.Price;
+
+
+                    orderItem.TotalPrice = (int)dbProduct.Price;
                     orderItems.Add(orderItem);
                     total += basketProduct.ProductCount * dbProduct.Price;
 

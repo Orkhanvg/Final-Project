@@ -22,35 +22,32 @@
                             <ul>
                                 <li><i class="fas fa-phone"></i>(+123) 456 7890</li>
                                 <li><i class="fas fa-envelope"></i>addyour@emailhere</li>
+                                
                             </ul>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-3 xs-display-none">
                         <ul class="top-social-icon">
-                            <li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="fab fa-pinterest-p"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a></li>
-                            @*@if (User.Identity.IsAuthenticated)
-        {
-            <li><i class="fas fa-sign-in"></i><a href="login.html" a></a></li>
-            <li><i class="fa-solid fa-user-plus"><a href="sign_up.html" a></a></i></li>
-        }*@
-                            <div class="User">
+                            
+                            
+                                 
+                                  @if (User.Identity.IsAuthenticated)
+                                  {
+                                     <li class="nav-item">
+                                        <a class="nav-link" href="#">@ViewBag.User</a>
+                                        @TempData["User Create Time"]
 
-
-                                @if (User.Identity.IsAuthenticated)
-
-                                {
-                                <li><a asp-controller="index" asp-action="home">Sign In</a></li>
-
-                            }
-
-                            else
-
-                            {
-                                <li><a href="my-account.html">My account</a></li>
-                            }
+                                        @TempData["Remaining Time"]
+                                     </li>
+                                  }
+                                  
+                               
+                                <li class="nav-item my-auto shop-cart">
+                                   <a asp-controller="basket" asp-action="showitem"> <i class="fas fa-shopping-bag"></i></a>
+                                    <sup class="rounded-circle">@ViewBag.BasketCount</sup>
+                                    <span>CART ($@ViewBag.TotalPrice)</span>
+                                   
+                                </li>
                                 <li><a asp-controller="basket" asp-action="checkout">Checkout</a></li>
                                 @if (!User.Identity.IsAuthenticated)
 
@@ -140,7 +137,14 @@
                                          <a asp-controller="Shop"  asp-action="Index">Shop</a>
 
                                     </li>
-                                    <li><a href="about.html">About Us</a></li>
+
+                                    <li>
+
+                                    <a asp-controller="AboutUs">About Us</a>
+                                    
+                                    </li>
+
+
                                     <li><a href="#">More</a>
                                         <ul>
                                             <li><a href="team.html">Our Team</a></li>
@@ -162,7 +166,7 @@
 
                                     </li>
 
-                                    <li><a href="contact.html">Contact Us</a></li>
+                                    <li><a asp-controller="Contact"> Contact Us</a></li>
                                 </ul>
                                 <!-- end menu area -->
                                 <!-- start atribute navigation -->

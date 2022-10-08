@@ -1,0 +1,65 @@
+﻿ @model ContactVM
+    <!-- start contact section -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 order-lg-1 order-2">
+                <h3 class="font-weight-900 font-size38">Send us a message!</h3>
+                <div class="contact-form-box margin-30px-top">
+                    <form method="post" action="#!">
+                        <input type="hidden" name="form-type" value="contact">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="name" placeholder="Your Name:" data-constraints="LettersOnly NotEmpty">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="phone" placeholder="Telephone:" data-constraints="Phone">
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" name="email" placeholder="Email:" data-constraints="Email NotEmpty">
+                            </div>
+                            <div class="col-md-12">
+                                <textarea name="message" rows="5" placeholder="Message:" data-constraints="NotEmpty"></textarea>
+                            </div>
+                            <div class="mfControls col-md-12">
+                                <button type="submit" class="butn medium">Send message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-6 order-lg-2 order-1 sm-margin-30px-bottom">
+                <div class="padding-100px-left md-padding-50px-left sm-no-padding-left height-100 position-relative">
+                    <div class="bg-theme padding-30px-lr padding-40px-tb sm-padding-25px-lr sm-padding-30px-tb border-radius-10 height-100">
+                        <h3 class="text-white">Information</h3>
+                        <p class="text-white">Mei te apeirian omittantur reformidans, duo in appetere interesset concludaturque. Est eruditi erroribus liberavisse in.</p>
+                        <div class="margin-90px-bottom">
+                            <ul class="list-style1">
+                                <li>
+                                    <i class="fas fa-envelope text-white margin-10px-right"></i>
+                                    <a href="javascript:void(0)" class="text-white">email@yoursite.com</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-phone text-white margin-10px-right"></i>
+                                    <a href="javascript:void(0)" class="text-white">(+123) 456-789</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-map-marker-alt text-white margin-10px-right"></i>
+                                    <a class="text-white">Pet Street 123 - New York</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="position-absolute contact-paw">
+                            <img src="img/content/contact-bg-min.png" class="width-60" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end contact section -->
+<!-- start map section -->
+<iframe style="width:100%; height:500px;" id="gmap_canvas" src="https://maps.google.com/maps?q=london&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+<!-- end map section -->

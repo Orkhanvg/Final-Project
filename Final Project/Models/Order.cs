@@ -23,6 +23,7 @@ namespace Final_Project.Models
         public OrderStatus OrderStatus { get; set; }
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
+        
 
         public List<OrderItem> OrderItems { get; set; }
 
