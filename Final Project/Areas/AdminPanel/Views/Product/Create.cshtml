@@ -1,0 +1,154 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/AdminPanel/Views/_AdminLayout.cshtml";
+}
+
+  <div class="card card-light">
+              <div class="card-header">
+                <h3 class="card-title">Create New Category</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label asp-for="@Model.Name"></label>
+                        <input id="catName" asp-for="@Model.Name" class="form-control" placeholder="Name ...">
+                        <span  class="text-danger" asp-validation-for="Name"></span>
+                      </div>
+                    </div>
+                  </div>
+                          <div class="row">
+                    <div class="col-sm-3">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label asp-for="@Model.Price"></label>
+                        <input asp-for="@Model.Price" class="form-control" placeholder="Price ...">
+                        <span  class="text-danger" asp-validation-for="Price"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                   <div class="row">
+                    <div class="col-sm-3">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label asp-for="@Model.StockCount"></label>
+                        <input min="0" max="99"  asp-for="@Model.StockCount" class="form-control" placeholder="Count ...">
+                        <span  class="text-danger" asp-validation-for="StockCount"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                   <div class="row">
+                    <div class="col-sm-3">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label asp-for="@Model.DiscountPercent"></label>
+                        <input min="0" max="100"  asp-for="@Model.DiscountPercent" class="form-control" placeholder="Percent ...">
+                        <span  class="text-danger" asp-validation-for="DiscountPercent"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                   <div class="row">
+                    <div class="col-sm-3">
+                      <!-- text input -->
+                      <div class="form-group">
+                         <label class="text-default" asp-for="Photos"></label><br />
+                         <input asp-for="Photos">
+                         <span  class="text-danger" asp-validation-for="Photos"></span>
+                      </div>
+                    </div>
+                  </div>
+                   <div class="row">
+                    <div class="col-sm-2">
+                      <!-- select -->
+                      <div class="form-group">
+                        <label class="text-default" asp-for="Brand"></label>
+                        <select asp-for="BrandId" asp-items="@ViewBag.ProductBrands" class="custom-select">
+                        </select>
+                        <span  class="text-danger" asp-validation-for="BrandId"></span>
+                      </div>
+                    </div>
+                   </div>
+                  <div class="row">
+                    <div class="col-sm-2">
+                      <div class="form-group">
+                        <label class="text-default" asp-for="TagIds">Tags</label>
+                        <select  asp-for="TagIds" asp-items="@ViewBag.Tags" class="custom-select">
+                        </select>
+                        <span  class="text-danger" asp-validation-for="TagIds"></span>
+                      </div>
+                    </div>
+                   </div>
+                    <div class="row">
+                    <div class="col-sm-2">
+                      <!-- select -->
+                      <div class="form-group">
+                        <label class="text-default" asp-for="Category"></label>
+                        <select id="select" asp-for="CategoryId" asp-items="@ViewBag.mainCategories" class="custom-select">
+                        </select>
+                        <span  class="text-danger" asp-validation-for="@Model.CategoryId"></span>
+                      </div>
+                    </div>
+                   </div>
+                    <div class="row">
+                    <div class="col-sm-2">
+                      <!-- select -->
+                      <div class="form-group">
+                        <label class="text-default">SubCategory</label>
+                        <select disabled id="subCat" asp-for="OwnCategory" class="custom-select">
+                            <option selected> Select</option>
+                        </select>
+                      </div>
+                    </div>
+                   </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <!-- textarea -->
+                      <div class="form-group">
+                        <label asp-for="@Model.Desc"></label>
+                        <textarea id="categoryDesc" asp-for="@Model.Desc" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        <span  class="text-danger" asp-validation-for="Desc"></span>
+                     </div>
+                    </div>
+                  </div>
+                 <button type="submit" class="btn btn-success">Submit</button> 
+                 <a asp-controller="product" asp-action="index" class="btn btn-danger">Cancel</a>
+                </form>
+              </div>
+              <!-- /.card-body -->
+ </div>
+
+
+@section Scripts{
+<script src="~/admin/plugins/jquery/jquery.min.js"></script>
+<!-- Jquery Validation cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<!-- Asp Jquery Validation cdn-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+
+<script>
+$(function () {
+    let select = document.getElementById("select")
+    let subCat = document.getElementById("subCat")
+
+    $("select#select").change(function () {
+        subCat.disabled=false
+        var id = $(this).val();
+        $("select#subCat").empty();
+       $.getJSON(`/AdminPanel/Product/LoadSubCategory?id=${id}`, function (data) {
+            $.each(data, function (i, item) {
+                $("select#subCat").append(`<option value="${item.id}">${item.name}</option>`);
+            });
+        });
+    })
+});
+</script>
+
+}

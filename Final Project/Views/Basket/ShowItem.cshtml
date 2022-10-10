@@ -84,7 +84,7 @@
                         {
                     <tr>
                         <td class="product-thumbnail text-left">
-                            <a href="javascript:void(0)" class="display-inline-block width-70px"><img src="~/assets/images/product/@item.ImageUrl" alt="" class="width-70px" /></a>
+                            <a href="javascript:void(0)" class="display-inline-block width-70px"><img src="~/img/shop/@item.ImageUrl" alt="" class="width-70px" /></a>
                         </td>
                         <td class="text-left">
                             <a href="single-product.html">@item.Name</a>
@@ -94,9 +94,9 @@
                             <span class="price">€@item.Price</span>
                         </td>
                         <td class="product-quantity">
-                            <a asp-controller="basket" asp-route-id="@item.Id" asp-action="min" type="button" class="sub btn btn-default"><i class="fal fa-minus"></i></a>
+                            <a asp-controller="basket" asp-route-id="@item.Id" asp-action="min" type="button" class="sub btn btn-default"><i class="fa-solid fa-minus"></i></a>
                             <input type="text" value="@item.ProductCount" />
-                            <a asp-controller="basket" asp-route-id="@item.Id" asp-action="plus" type="button" class="add btn btn-default"><i class="fal fa-plus"></i></a>
+                            <a asp-controller="basket" asp-route-id="@item.Id" asp-action="plus" type="button" class="add btn btn-default"><i class="fa-solid fa-plus"></i></a>
                         </td>
 
 
@@ -109,7 +109,7 @@
 
                         <td class="product-remove text-center">
                             <div class="product-delete">
-                                <a asp-controller="basket" asp-route-id="@item.Id" asp-action="removeItem"><i class="fal fa-trash-alt"></i></a>
+                                <a asp-controller="basket" asp-route-id="@item.Id" asp-action="removeItem"><i class="fa-solid fa-trash"></i></a>
                             </div>
                             @*<a href="javascript:void(0)"><i class="fas fa-times"></i></a>*@
                         </td>

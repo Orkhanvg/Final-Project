@@ -1,5 +1,5 @@
 /*Search styles*/
-.search-form_label{ width: 100%; display: block; padding: 10px 50px 10px 10px; background: trancparent; border: 1px solid #c9c9c9; }
+.search-form_label{ width: 100%; display: block; padding: 10px 50px 10px 10px; background: transparent; border: 1px solid #c9c9c9; }
 .search-form_input{ outline: none; background-color: transparent; border: none; -webkit-appearance: none; border-radius: 0; vertical-align: baseline; box-shadow: none; color: #000; display: block; width: 100%; font-size: 16px; line-height: 16px; height: 37px; }
 .search-form + *{ margin-top: 25px; }
 .search-form.on{ display: block; }

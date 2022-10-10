@@ -25,6 +25,7 @@ namespace Final_Project.DAL
         public DbSet <BasketItem> BasketItems { get; set; }
         public DbSet <Bio> Bios { get; set; }
         public DbSet <Subscriber> Subscribers { get; set; }
+        public DbSet<WishList> WishLists { get; set; }
 
     }
 }

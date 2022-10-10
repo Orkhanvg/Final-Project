@@ -1,6 +1,6 @@
 ﻿@model PaginationVM<Product>
-@{ ViewData["Title"] = "Shop";
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
+@{ ViewData["Title"] = "Basket";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 
 
@@ -20,8 +20,12 @@
                         </div>
                         <ul class="list-style3">
                             <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Care</a></li>
                             <li><a href="#">Clothing</a></li>
+                            <li><a href="#">Decor</a></li>
                             <li><a href="#">Food</a></li>
+                            <li><a href="#">Others</a></li>
+                            <li><a href="#">Uncategorized</a></li>
                         </ul>
                     </div>
                     <div class="widget">
@@ -30,19 +34,19 @@
                         </div>
 
                         <div class="media border-bottom margin-15px-bottom padding-15px-bottom">
-                            <img src="~/assests/img/shop/09.jpg" class="mr-3 border-radius-5" alt="...">
+                            <img src="img/shop/09.jpg" class="mr-3 border-radius-5" alt="...">
                             <div class="media-body">
                                 <h5 class="mt-0 font-size16 no-margin-bottom"><a href="javascript:void(0);" class="text-extra-dark-gray">Meats biscuits</a></h5> $599
                             </div>
                         </div>
                         <div class="media border-bottom margin-15px-bottom padding-15px-bottom">
-                            <img src="~/assests/img/shop/10.jpg" class="mr-3 border-radius-5" alt="...">
+                            <img src="img/shop/10.jpg" class="mr-3 border-radius-5" alt="...">
                             <div class="media-body">
                                 <h5 class="mt-0 font-size16 no-margin-bottom"><a href="javascript:void(0);" class="text-extra-dark-gray">Dog toys</a></h5> $100
                             </div>
                         </div>
                         <div class="media">
-                            <img src="~/assests/img/shop/11.jpg" class="mr-3 border-radius-5" alt="...">
+                            <img src="img/shop/11.jpg" class="mr-3 border-radius-5" alt="...">
                             <div class="media-body">
                                 <h5 class="mt-0 font-size16 no-margin-bottom"><a href="javascript:void(0);" class="text-extra-dark-gray">Fancy collar</a></h5> $99
                             </div>
@@ -108,304 +112,52 @@
                 </div>
 
                 <div class="row margin-50px-bottom sm-margin-30px-bottom">
+                    @foreach (var item in Model.Items)
+                    {
 
-                    <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
-                        <div class="product-pet">
-                            <div class="position-relative">
-                                <a href="#">
-                                    <img src="img/shop/01.jpg" alt="" />
-                                </a>
-                                <div class="product-cart">
-                                    <a asp-controller="basket" asp-action="additem"> 
-                                        <i class="fas fa-plus"></i>
-                                    </a>
-                                    <a class="action-wishlist" href="#">
-                                        <i class="far fa-heart"></i>
-                                    </a>
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="padding-20px-top text-center">
-                                <h5 class="margin-5px-bottom font-weight-800"><a href="#" class="font-size26 text-extra-dark-gray">Chew Toy</a></h5>
-                                <div class="text-secondary-color">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div>
-                                    <span class="font-weight-700">$39.00</span>
-                                </div>
-                            </div>
+
+
+            <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
+                <div class="product-pet">
+                    <div class="position-relative">
+                        @foreach (var image in item.ProductImages)
+                        {
+                            if (image.IsMain)
+                            {
+                            <img width="200" height="220" class="first-image" src="~/assets/img/shop/@image.ImageUrl" alt="product"> 
+                            }
+                                else
+                                {
+                                    <img width="200" height="220" class="second-image" src="~/assets/img/shop/@image.ImageUrl" alt="product">
+                                }
+
+
+                            }
+                    <div class="product-cart">
+                        <a asp-controller="wishlist" asp-action="additem" asp-route-id="@Model.Items.FirstOrDefault().Id">
+                            <i class="far fa-heart"></i>
+                        </a>
+                        <a asp-controller="basket" asp-action="additem" asp-route-id="@Model.Items.FirstOrDefault().Id">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    </div>
+                    </div>
+                    <div class="padding-20px-top text-center">
+                        <h5 class="margin-5px-bottom font-weight-800"><a href="#" class="font-size26 text-extra-dark-gray">@item.Name</a></h5>
+                        <div class="text-secondary-color">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div>
+                            <span class="font-weight-700">$@item.Price</span>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
-                        <div class="product-pet">
-                            <div class="position-relative">
-                                <a href="#">
-                                    <img src="img/shop/02.jpg" alt="" />
-                                </a>
-                                <div class="product-cart">
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-plus"></i>
-                                    </a>
-                                    <a class="action-wishlist" href="#">
-                                        <i class="far fa-heart"></i>
-                                    </a>
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="padding-20px-top text-center">
-                                <h5 class="margin-5px-bottom font-weight-800"><a href="#" class="font-size26 text-extra-dark-gray">Steel Pet Bowl</a></h5>
-                                <div class="text-secondary-color">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div>
-                                    <span class="font-weight-700">$39.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
-                        <div class="product-pet">
-                            <div class="position-relative">
-                                <a href="#">
-                                    <img src="img/shop/03.jpg" alt="" />
-                                </a>
-                                <div class="product-cart">
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-plus"></i>
-                                    </a>
-                                    <a class="action-wishlist" href="#">
-                                        <i class="far fa-heart"></i>
-                                    </a>
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="padding-20px-top text-center">
-                                <h5 class="margin-5px-bottom font-weight-800"><a href="#" class="font-size26 text-extra-dark-gray">Pet Bed</a></h5>
-                                <div class="text-secondary-color">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div>
-                                    <span class="font-weight-700">$39.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
-                        <div class="product-pet">
-                            <div class="position-relative">
-                                <a href="#">
-                                    <img src="img/shop/04.jpg" alt="" />
-                                </a>
-                                <div class="product-cart">
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-plus"></i>
-                                    </a>
-                                    <a class="action-wishlist" href="#">
-                                        <i class="far fa-heart"></i>
-                                    </a>
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="padding-20px-top text-center">
-                                <h5 class="margin-5px-bottom font-weight-800"><a href="#" class="font-size26 text-extra-dark-gray">Pet Harness</a></h5>
-                                <div class="text-secondary-color">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div>
-                                    <span class="font-weight-700">$39.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
-                        <div class="product-pet">
-                            <div class="position-relative">
-                                <a href="#">
-                                    <img src="img/shop/05.jpg" alt="" />
-                                </a>
-                                <div class="product-cart">
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-plus"></i>
-                                    </a>
-                                    <a class="action-wishlist" href="#">
-                                        <i class="far fa-heart"></i>
-                                    </a>
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="padding-20px-top text-center">
-                                <h5 class="margin-5px-bottom font-weight-800"><a href="#" class="font-size26 text-extra-dark-gray">Onesie dog pj</a></h5>
-                                <div class="text-secondary-color">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div>
-                                    <span class="font-weight-700">$39.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
-                        <div class="product-pet">
-                            <div class="position-relative">
-                                <a href="#">
-                                    <img src="img/shop/06.jpg" alt="">
-                                </a>
-                                <div class="product-cart">
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-plus"></i>
-                                    </a>
-                                    <a class="action-wishlist" href="#">
-                                        <i class="far fa-heart"></i>
-                                    </a>
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="padding-20px-top text-center">
-                                <h5 class="margin-5px-bottom font-weight-800"><a href="#" class="font-size26 text-extra-dark-gray">Pet Food Bag</a></h5>
-                                <div class="text-secondary-color">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div>
-                                    <span class="font-weight-700">$39.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
-                        <div class="product-pet">
-                            <div class="position-relative">
-                                <a href="#">
-                                    <img src="~/assests/img/shop/07.jpg" alt="">
-                                </a>
-                                <div class="product-cart">
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-plus"></i>
-                                    </a>
-                                    <a class="action-wishlist" href="#">
-                                        <i class="far fa-heart"></i>
-                                    </a>
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="padding-20px-top text-center">
-                                <h5 class="margin-5px-bottom font-weight-800"><a href="#" class="font-size26 text-extra-dark-gray">Pet Leashtes</a></h5>
-                                <div class="text-secondary-color">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div>
-                                    <span class="font-weight-700">$39.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
-                        <div class="product-pet">
-                            <div class="position-relative">
-                                <a href="#">
-                                    <img src="~/assests/img/shop/08.jpg" alt="">
-                                </a>
-                                <div class="product-cart">
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-plus"></i>
-                                    </a>
-                                    <a class="action-wishlist" href="#">
-                                        <i class="far fa-heart"></i>
-                                    </a>
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="padding-20px-top text-center">
-                                <h5 class="margin-5px-bottom font-weight-800"><a href="#" class="font-size26 text-extra-dark-gray">Soft Pet Toy</a></h5>
-                                <div class="text-secondary-color">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div>
-                                    <span class="font-weight-700">$39.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
-                        <div class="product-pet">
-                            <div class="position-relative">
-                                <a href="#">
-                                    <img src="~/assests/img/shop/12.jpg" alt="">
-                                </a>
-                                <div class="product-cart">
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-plus"></i>
-                                    </a>
-                                    <a class="action-wishlist" href="#">
-                                        <i class="far fa-heart"></i>
-                                    </a>
-                                    <a href="javascript:void(0);">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="padding-20px-top text-center">
-                                <h5 class="margin-5px-bottom font-weight-800"><a href="#" class="font-size26 text-extra-dark-gray">Pet Cabin Place</a></h5>
-                                <div class="text-secondary-color">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div>
-                                    <span class="font-weight-700">$39.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            }
                 </div>
 
                 <div class="row">
@@ -421,7 +173,11 @@
                         </div>
                     </div>
                 </div>
-
+                <ul class="pagination justify-content-center mt-30">
+                    @for (var i = 1; i <= Model.PageCount; i++)
+                    {
+                    <li class=" @(Model.CurrentPage==i?"active":"")"><a asp-action="shop" asp-route-page="@i">@i</a></li>}
+                </ul>
             </div>
             <!-- end right panel section -->
 

@@ -28,7 +28,7 @@ namespace Final_Project.Controllers
                 .Include(p => p.Category).Where(c => c.IsDeleted != true)
                 .Include(pi => pi.ProductImages).Skip((page - 1) * take).Take(take).ToList();
             PaginationVM<Product> paginationVM = new PaginationVM<Product>(product, PageCount(take), page);
-
+            paginationVM.Items = product;
             return View(paginationVM);
         }
         private int PageCount(int take)

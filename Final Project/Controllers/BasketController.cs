@@ -1,4 +1,5 @@
-﻿using Final_Project.DAL;
+﻿
+using Final_Project.DAL;
 using Final_Project.Models;
 using Final_Project.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -13,12 +14,12 @@ using System.Threading.Tasks;
 
 namespace Final_Project.Controllers
 {
-    public class BasketController:Controller
+    public class BasketController : Controller
     {
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _userManager;
 
-        public BasketController (AppDbContext context, UserManager<AppUser> userManager)
+        public BasketController(AppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -30,8 +31,8 @@ namespace Final_Project.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public async Task <IActionResult> AddItem (int? id)
+        
+        public async Task<IActionResult> AddItem(int? id)
         {
             double price = 0;
             double count = 0;
@@ -92,7 +93,7 @@ namespace Final_Project.Controllers
                 Count = count,
             };
 
-           
+
             return RedirectToAction("index", "home");
         }
         public IActionResult ShowItem()

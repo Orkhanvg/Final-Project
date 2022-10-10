@@ -1,19 +1,23 @@
 ﻿@model HomeVM
 
-@{ ViewData["Title"] = "Index"; }
+@{ 
+    ViewData["Title"] = "Index"; 
+
+ }
 
 
 <!-- start banner-->
 <div class="rev_slider_wrapper fullscreen custom-controls">
 
-    @foreach (var item in Model.SliderContents)
-    {
+  
 <div id="rev_slider_1" class="rev_slider fullscreenbanner" style="display: none;" data-version="5.4.5">
     <ul>
+       
         <li data-transition="fade">
-
-            <img src="~/assets/images/@item.Slider.ImageUrl" alt="slide6" class="rev-slidebg">
-
+            @foreach (var item in Model.SliderContents)
+            {
+                <img src="~/assets/img/@item.Slider.ImageUrl" alt="slide6" class="rev-slidebg">
+            }
             <!-- start layer 1 -->
             <div class="tp-caption alt-font font-weight-700 text-white" data-x="30" data-y="center" data-voffset="[-100,-100,-130,-140]" data-fontsize="[58,48,36,32]" data-lineheight="[60,52,40,36]" data-width="[700, 700, 500, 300]" data-whitespace="[normal, normal, normal, normal]" data-frames='[{
                                     "delay":0,
@@ -34,9 +38,10 @@
                 Love, Care your Pet
             </div>
         </li>
-
-    </ul>
-</div>}
+        
+                </ul>
+</div>
+        
 </div>
 <!-- end banner-->
 <!-- start categories section -->
@@ -74,7 +79,7 @@
                     {
                     <div class="position-relative">
                     <a href="javascript:void(0);">
-                         <img src="~/assets/images/@item.ProductImages.Find(i=>i.IsMain==true).ImageUrl" alt="" />
+                         @*<img src="~/assets/images/@item.ProductImages.Find(i=>i.IsMain==true).ImageUrl" alt="" />*@
                      </a>
                    <div class="product-cart">
                     

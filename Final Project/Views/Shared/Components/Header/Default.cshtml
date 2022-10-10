@@ -1,10 +1,10 @@
 ﻿@model Bio
  <!-- start page loading -->
-<div id="preloader">
+@*<div id="preloader">
     <div class="row loader">
         <div class="loader-icon"></div>
     </div>
-</div>
+</div>*@
 <!-- end page loading -->
 
 
@@ -20,50 +20,51 @@
                     <div class="col-md-9">
                         <div class="top-bar-info">
                             <ul>
-                                <li><i class="fas fa-phone"></i>(+123) 456 7890</li>
-                                <li><i class="fas fa-envelope"></i>addyour@emailhere</li>
+                                <li><i class="fas fa-phone"></i>(+994) 50 200 21 40</li>
+                                <li><i class="fas fa-envelope"></i>PawStore@paw.com</li>
                                 
                             </ul>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-3 xs-display-none">
                         <ul class="top-social-icon">
-                            
-                            
-                                 
-                                  @if (User.Identity.IsAuthenticated)
-                                  {
-                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">@ViewBag.User</a>
-                                        @TempData["User Create Time"]
 
-                                        @TempData["Remaining Time"]
-                                     </li>
-                                  }
-                                  
-                               
-                                <li class="nav-item my-auto shop-cart">
-                                   <a asp-controller="basket" asp-action="showitem"> <i class="fas fa-shopping-bag"></i></a>
-                                    <sup class="rounded-circle">@ViewBag.BasketCount</sup>
-                                    <span>CART ($@ViewBag.TotalPrice)</span>
-                                   
+
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">@ViewBag.User</a>
+                                    @TempData["User Create Time"]
+
+                                    @TempData["Remaining Time"]
                                 </li>
-                                <li><a asp-controller="basket" asp-action="checkout">Checkout</a></li>
-                                @if (!User.Identity.IsAuthenticated)
+                                <li><a asp-controller="wishlist" asp-action="index"><i class="fa-solid fa-heart"></i></a></li>
+                            }
 
-                                {
 
-                                    <li><a asp-controller="account" asp-action="login">Sign In</a></li>
+                            <li class="nav-item my-auto shop-cart">
+                                <a asp-controller="basket" asp-action="showitem"> <i class="fas fa-shopping-bag"></i></a>
+                                <sup class="rounded-circle">@ViewBag.BasketCount</sup>
+                                <span>CART ($@ViewBag.TotalPrice)</span>
 
-                                }
+                            </li>
+                            @*<li><a asp-controller="basket" asp-action="checkout">Checkout</a></li>*@
+                            @if (!User.Identity.IsAuthenticated)
 
-                                else
+                            {
 
-                                {
-                                    <li><a asp-controller="account" asp-action="logout">Sign out</a></li>
-                                }
+                                <li><a asp-controller="account" asp-action="login">Sign In</a></li>
 
-                            </ul>
+                            }
+
+                            else
+
+                            {
+                                <li><a asp-controller="account" asp-action="logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                            }
+
+                        </ul>
                     </div>
                         
                     </div>
@@ -120,7 +121,7 @@
                                 <div class="navbar-header navbar-header-custom">
                                     <!-- start logo -->
 
-                                    <a href="index.html" class="navbar-brand"><img src="~/assets/images/Logo" alt="logo"></a>
+                                    <a asp-action="Index" class="navbar-brand"><img src="~/assets/img/logos/logo.png" alt="logo"></a>
 
                                     <!-- end logo -->
                                 </div>
@@ -145,7 +146,7 @@
                                     </li>
 
 
-                                    <li><a href="#">More</a>
+                                    @*<li><a href="#">More</a>
                                         <ul>
                                             <li><a href="team.html">Our Team</a></li>
                                             <li><a href="pricing-table.html">Pricing</a></li>
@@ -159,7 +160,7 @@
                                             <li><a href="faq.html">FAQ</a></li>
                                             <li><a href="404-page.html">404 Page</a></li>
                                         </ul>
-                                    </li>
+                                    </li>*@
                                     <li>
 
                                         <a href="standard-blog-post.html">Blog</a>

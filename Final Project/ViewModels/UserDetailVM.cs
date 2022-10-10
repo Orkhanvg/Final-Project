@@ -9,6 +9,8 @@ namespace Final_Project.ViewModels
 {
     public class UserDetailVM
     {
+        internal AppUser appUser;
+
         public int Id { get; set; }
         
         public List<Order> orders { get; set; }

@@ -1,0 +1,81 @@
+﻿                
+@model Category
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/AdminPanel/Views/_AdminLayout.cshtml";
+}
+
+  <div class="card card-light">
+              <div class="card-header">
+                <h3 class="card-title">Create New Category</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label asp-for="@Model.Name"></label>
+                        <input id="catName" asp-for="@Model.Name" class="form-control" placeholder="Name ...">
+                        <span  class="text-danger" asp-validation-for="Name"></span>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="row">
+                    <div class="col-sm-3">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label class="text-default" asp-for="@Model.Image">Select for Main Category</label><br />
+                        <input id="img" asp-for="@Model.Image">
+                        <span  class="text-danger" asp-validation-for="Image"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-2">
+                      <!-- select -->
+                      <div class="form-group">
+                        <label class="text-default" asp-for="Parent">Select for SubCategory</label>
+                        <select id="select" asp-for="ParentId" asp-items="@ViewBag.Categories" class="custom-select">
+                        </select>
+                        <span  class="text-danger" asp-validation-for="ParentId"></span>
+                      </div>
+                    </div>
+                   </div>
+                 <button type="submit" class="btn btn-success">Submit</button> 
+                 <a asp-controller="category" asp-action="index" class="btn btn-danger">Cancel</a>
+                </form>
+              </div>
+              <!-- /.card-body -->
+ </div>
+
+
+@section Scripts{
+<script src="~/admin/dist/js/main.js"></script>
+
+<script src="~/admin/plugins/jquery/jquery.min.js"></script>
+<!-- Jquery Validation cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<!-- Asp Jquery Validation cdn-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+}
+
+<script>
+    let catName = document.getElementById("catName")
+    let select = document.getElementById("select")
+    let img = document.getElementById("img")
+    select.onchange = function(){
+       img.disabled=true;
+    }
+    img.onchange=function(){
+        if(this.value.length>0){
+          select.disabled=true
+        }
+        else
+        {
+          select.disabled=false
+        }
+    }
+</script>

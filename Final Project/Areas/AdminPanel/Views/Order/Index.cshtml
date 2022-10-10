@@ -1,0 +1,118 @@
+﻿@model OrderVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/AdminPanel/Views/_AdminLayout.cshtml";
+    int no = 0;
+}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>DataTables</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.row -->
+     <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Responsive Hover Table</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Owner</th>
+                      <th>Date</th>
+                      <th>Order Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      
+                    @foreach (var item in Model.Orders)
+                    {
+                      no++;
+                     
+                      <tr>
+                      <td>@no</td>
+                       @foreach (var user in Model.AppUsers)
+                      {
+                         if (item.AppUserId==user.Id)
+                        {
+                         <td>@user.FullName</td>
+                        }
+                      }
+                      <td>@item.SaledAt.ToString("dddd, dd MMMM yyyy HH:mm:ss")</td>
+                      <td>@item.OrderStatus</td>
+                     </tr>
+                   }
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        </div>
+        </section>
+        <!-- /.row -->
+
+
+
+            <!-- DataTables  & Plugins -->
+<script src="~/admin/plugins/jquery/jquery.min.js"></script>
+<script src="~/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="~/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="~/admin/plugins/jszip/jszip.min.js"></script>
+<script src="~/admin/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/admin/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+
+  <script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+      $("#example2").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+  });
+</script>

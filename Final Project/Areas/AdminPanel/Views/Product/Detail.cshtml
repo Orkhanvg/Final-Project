@@ -1,0 +1,60 @@
+﻿
+@model Product
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/AdminPanel/Views/_AdminLayout.cshtml";
+}
+
+<div class="row">
+     <div class="col-md-6 d-flex align-items-stretch">
+              <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      @foreach (var item in Model.ProductImages)
+                      {
+                          if (item.IsMain)
+                          {
+                            <img src="~/assets/images/product/@item.ImageUrl" width="100%" class="img-fluid col-4" alt="...">
+                            <span>Profile Photo</span>
+                          }
+                          else
+                          {
+                          <div>
+                              <img src="~/assets/images/product/@item.ImageUrl" width="100%" class="img-fluid col-4" alt="...">
+                          </div> 
+                          }
+                      }
+                </div>
+                    <div class="card-body">
+                      <h4 class="card-title">@Model.Name</h4>
+                        <h5 class="card-text">Create time: @Model.CreatedAt</h5>
+                @if (Model.UptadetAt!=null)
+                {
+                    <h5 class="card-text">Update time:@Model.UptadetAt</h5>
+                }    
+                      
+                      <h5 class="card-text">Price: @Model.Price</h5>
+                      <h5 class="card-text">Discount percent: @(Model.DiscountPercent)%</h5>
+                      <h5 class="card-text">Discount price: @Model.DiscountPrice</h5>
+                      <h5 class="card-text">Category: @Model.Category.Name</h5>
+                         <h5 class="card-text">Tags: 
+                    @foreach (var item in Model.ProductTags)
+                    {
+                        @item.Tag.Name  
+                    }
+                </h5>
+                      <h5 class="card-text">Tax: @Model.TaxPercent</h5>
+                      <h5 class="card-text">Price: @Model.Price</h5>
+                      @Html.Raw(Model.IsAvailability==true?"<h5 class='card-text'>Aviable: True</h5>":"<h5 class='card-text'>Aviable: Out of stock</h5>")
+                      <h5 class="card-text">In stock: @Model.StockCount</h5>
+                    </div>
+                       <a class="btn btn-dark" asp-action="index"> Go Back</a>
+                  </div>
+                </div>
+
+                </div>
+
+                    </div>
+                  </div>
+<script src="~/admin/plugins/jquery/jquery.min.js"></script>

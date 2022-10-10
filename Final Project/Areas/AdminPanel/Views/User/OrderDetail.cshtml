@@ -1,0 +1,62 @@
+﻿@model List<OrderItem>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/AdminPanel/Views/_AdminLayout.cshtml";
+    int no = 0;
+}
+    <!-- /.row -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Responsive Hover Table</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Owner</th>
+                      <th>Date</th>
+                      <th>Order Status</th>
+                      <th>Zip Code</th>
+                      <th>Product Name</th>
+                      <th>Product Count</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach (var item in Model)
+                    {
+                       no++;
+                      <tr>
+                      <td>@no</td>
+                      <td>@item.Order.AppUser.FullName</td>
+                      <td>@item.Order.SaledAt.ToString("dddd, dd MMMM yyyy HH:mm:ss.ffff")</td>
+                      <td>@item.Order.OrderStatus</td>
+                      <td>@item.Order.ZipCode</td>
+                      <td>@item.Product.Name</td>
+                      <td>@item.Count</td>
+                     </tr>
+                   }
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <!-- /.row -->

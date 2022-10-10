@@ -1,0 +1,49 @@
+﻿@model Brand
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/AdminPanel/Views/_AdminLayout.cshtml";
+}
+
+  <div class="card card-light">
+      <div asp-validation-summary="ModelOnly"></div>
+              <div class="card-header">
+                <h3 class="card-title">Create New Category</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label asp-for="@Model.Name"></label>
+                        <input asp-for="@Model.Name" class="form-control" placeholder="Name ...>
+                         <span asp-validation-for="Name"></span>
+                        <span class="text-danger" asp-validation-for="Name"></span>
+                      </div>
+                    </div>
+                  </div>
+                 
+                 <div class="row">
+                    <div class="col-sm-3">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label asp-for="@Model.Image"></label><br />
+                        <input id="imgInput" asp-for="@Model.Image">
+                        <span  class="text-danger" asp-validation-for="Image"></span>
+                      </div>
+                    </div>
+                  </div>
+                 <button id="sbmtBtn" type="submit" class="btn btn-success">Submit</button> 
+                 <a asp-controller="brand" asp-action="index" class="btn btn-danger">Cancel</a>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+<script src="~/admin/plugins/jquery/jquery.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+<!-- Jquery Validation cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<!-- Asp Jquery Validation cdn-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/admin/dist/js/JavaScript.js"></script>
