@@ -1,4 +1,4 @@
-﻿@model Final_Project.ViewModels.OrderVM
+﻿@model Order
 @{ double total = 0;
     double shippingPrice = 0;
     double finalPrice = 0;
@@ -32,7 +32,7 @@
             <!-- start billing address -->
             <div class="col-lg-5 col-md-6 xs-margin-30px-bottom">
 
-                <div class="border margin-20px-bottom padding-10px-all border-radius-5">Returning customer? <a asp-action="LoginVM">Click here to login</a></div>
+                <div class="border margin-20px-bottom padding-10px-all border-radius-5">Returning customer? <a asp-action="Index" asp-controller="Login">Click here to login</a></div>
 
                 <h5>Billing Address</h5>
                 <form id="billing-form" method="post" name="billing-form">
@@ -321,7 +321,8 @@
 
                         </div>
                     </div>
-                    <div class="row">
+                   
+                 @*<div class="row">
                         <div class="col-lg-12">
                             <label asp-for="Email">Email Address*</label>
                             <input asp-for="Email" placeholder="Email Address">
@@ -332,18 +333,7 @@
                             <label asp-for="Phone">Phone*</label>
                             <input asp-for="Phone" placeholder="Phone">
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label>* Account Password:</label>
-                            <input type="password" name="account_password" required="required">
-                        </div>
-                    </div>
+                    </div>*@   
                 </form>
             </div>
             <!-- end billing address -->
@@ -403,14 +393,25 @@
                     <div class="col-lg-5 offset-lg-2 col-md-6 offset-lg-0">
                         <table class="table cart-sub-total">
                             <tbody>
-                                <tr>
-                                    <th class="text-right no-padding-right text-uppercase">Cart Subtotal</th>
-                                    <td class="text-uppercase text-right no-padding-right">$798</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-right no-padding-right text-uppercase">Shipping and Handling</th>
-                                    <td class="text-uppercase text-right no-padding-right">Free</td>
-                                </tr>
+                                <h4 class="title">Product  <span>Total</span></h4>
+                                <ul>
+                                    @if (ViewBag.Products != null)
+                                    {
+                                      @foreach (var prod in ViewBag.Products)
+                                      {
+                                      <li>
+                                         <p class="total-value">@prod.Name X @prod.ProductCount</p>
+                                         <p class="total-amount">€@(prod.ProductCount*prod.Price)</p>
+                                      </li>
+                                      }
+                                    }
+
+                                          else
+                                        {
+
+                                         <h4> </h4>
+                                        
+                                        }
                                 <tr>
                                     <td class="no-padding-right xs-no-padding" colspan="2">
                                         <hr>
@@ -418,8 +419,10 @@
                                 </tr>
                                 <tr class="total">
                                     <th class="text-uppercase text-right no-padding-right xs-no-padding">Order Total</th>
-                                    <td class="text-uppercase text-right no-padding-right xs-no-padding">$798</td>
+                                    <td class="text-uppercase text-right no-padding-right xs-no-padding">$@finalPrice</td>
                                 </tr>
+
+
                                 <tr>
                                     <td class="no-padding-right xs-no-padding" colspan="2">
                                         <hr class="no-margin-bottom">

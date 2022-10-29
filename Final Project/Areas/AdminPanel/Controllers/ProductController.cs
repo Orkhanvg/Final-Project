@@ -102,7 +102,7 @@ namespace Final_Project.Areas.AdminPanel.Controllers
                     return View();
                 }
                 ProductImage image = new ProductImage();
-                image.ImageUrl = item.SaveImage(_env, "assets/images/product");
+                image.ImageUrl = item.SaveImage(_env, "assets/img/product");
 
                 if (product.Photos.Count == 1)
                 {
@@ -284,7 +284,7 @@ namespace Final_Project.Areas.AdminPanel.Controllers
                         return View();
                     }
                     ProductImage image = new ProductImage();
-                    image.ImageUrl = item.SaveImage(_env, "assets/images/product");
+                    image.ImageUrl = item.SaveImage(_env, "assets/img/product");
 
                     if (product.Photos.Count == 1)
                     {
@@ -320,7 +320,7 @@ namespace Final_Project.Areas.AdminPanel.Controllers
             {
                 if (item.ImageUrl != null)
                 {
-                    path = Path.Combine(_env.WebRootPath, "assets/images/product", item.ImageUrl);
+                    path = Path.Combine(_env.WebRootPath, "assets/img/product", item.ImageUrl);
                 }
             }
             if (path != null)
@@ -398,13 +398,13 @@ namespace Final_Project.Areas.AdminPanel.Controllers
             {
                 if (product.DiscountPercent / dbProduct.DiscountPercent > 2)
                 {
-                    token = $" Sezon Sonu Kompaniyasina Dusen bu mehsulumuzun qiymeti indi {dbProduct.DiscountPercent - product.DiscountPercent}% Endirimde !! https://preview.themeforest.net/item/allup-electronics-ecommerce-html5-template/full_screen_preview/27042714?_ga=2.98090911.1817295916.1659218963-1275575051.1654878103&_gac=1.53084506.1657637222.CjwKCAjwt7SWBhAnEiwAx8ZLaqavzy2p1AcQEh_emgIhVWjEcAPZTJRguybkfDIygO_xWE2VdK6vvhoChPYQAvD_BwE ";
+                    token = $" Sezon Sonu Kompaniyasina Dusen bu mehsulumuzun qiymeti indi {dbProduct.DiscountPercent - product.DiscountPercent}% Endirimde? ";
                     var emailResult = helper.DiscountPrice(subscriber.Email, token);
                     continue;
                 }
                 else if (product.DiscountPercent / dbProduct.DiscountPercent == 2)
                 {
-                    token = $" Mehsulun qiymeti 50% Endirildi https://preview.themeforest.net/item/allup-electronics-ecommerce-html5-template/full_screen_preview/27042714?_ga=2.98090911.1817295916.1659218963-1275575051.1654878103&_gac=1.53084506.1657637222.CjwKCAjwt7SWBhAnEiwAx8ZLaqavzy2p1AcQEh_emgIhVWjEcAPZTJRguybkfDIygO_xWE2VdK6vvhoChPYQAvD_BwE ";
+                    token = $" Mehsulun qiymeti 50% Endirildi";
                     var emailResult = helper.DiscountPrice(subscriber.Email, token);
                     continue;
                 }
@@ -440,5 +440,27 @@ namespace Final_Project.Areas.AdminPanel.Controllers
             if (dbProduct == null) return NotFound();
             return View(dbProduct);
         }
+
+
+        //delete
+        public IActionResult Delete(int? id)
+        {
+            if (id == null) return NotFound();
+
+            Product dbProduct = _context.Products.Find(id);
+
+            if (dbProduct == null) return NotFound();
+
+            dbProduct.IsDeleted = true;
+            dbProduct.DeletedAt = DateTime.Now;
+            dbProduct.CreatedAt = null;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("index");
+
+        }
+
+        //delete end
     }
 }

@@ -6,20 +6,18 @@
             <div class="col-lg-6 order-lg-1 order-2">
                 <h3 class="font-weight-900 font-size38">Send us a message!</h3>
                 <div class="contact-form-box margin-30px-top">
-                    <form method="post" action="#!">
+                    <form method="post" asp-action="Index">
                         <input type="hidden" name="form-type" value="contact">
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" name="name" placeholder="Your Name:" data-constraints="LettersOnly NotEmpty">
+                                <input type="text"  name="Name" placeholder="Your Name:">
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" name="phone" placeholder="Telephone:" data-constraints="Phone">
+   
+                            <div class="col-md-12">
+                                <input type="text" name="Email" placeholder="Email:">
                             </div>
                             <div class="col-md-12">
-                                <input type="text" name="email" placeholder="Email:" data-constraints="Email NotEmpty">
-                            </div>
-                            <div class="col-md-12">
-                                <textarea name="message" rows="5" placeholder="Message:" data-constraints="NotEmpty"></textarea>
+                                <textarea name="Message" rows="5" placeholder="Message:"></textarea>
                             </div>
                             <div class="mfControls col-md-12">
                                 <button type="submit" class="butn medium">Send message</button>

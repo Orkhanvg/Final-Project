@@ -30,16 +30,15 @@
 
 
 <!-- start page title section -->
-<section class="page-title-section bg-img cover-background" data-overlay-dark="7" data-background="img/bg/page-title.jpg">
-    <div class="container">
+<section class="page-title-section " he data-overlay-dark="7" data-background="img/bg/page-title.jpg" style="padding:0 !important;">
+    <div class="container " style="margin-top:25px;">
         <div class="row">
-        <div class="col-md-12">
-            <h1>Shop Cart</h1>
+        <div class="col-md-2">
         </div>
             <div class="col-md-12">
              <ul>
-               <li><a href="home-1.html">Home</a></li>
-               <li><a href="javascript:void(0)">Shop Cart</a></li>
+               <li><a  asp-controller="Home" asp-action="Index" >Home</a></li>
+               <li><a href="javascript:void(0)" style="height:10%">Shop Cart</a></li>
              </ul>
          </div>
          </div>
@@ -52,7 +51,7 @@
 
 
 <!-- start cart table section -->
-<section>
+<section style="padding:0!important;">
     <div class="container lg-container">
 
         <div class="row">
@@ -84,7 +83,7 @@
                         {
                     <tr>
                         <td class="product-thumbnail text-left">
-                            <a href="javascript:void(0)" class="display-inline-block width-70px"><img src="~/img/shop/@item.ImageUrl" alt="" class="width-70px" /></a>
+                            <a class="display-inline-block width-70px"><img src="~/assets/img/shop/@item.ImageUrl" alt="" class="width-70px" /></a>
                         </td>
                         <td class="text-left">
                             <a href="single-product.html">@item.Name</a>
@@ -94,15 +93,15 @@
                             <span class="price">€@item.Price</span>
                         </td>
                         <td class="product-quantity">
-                            <a asp-controller="basket" asp-route-id="@item.Id" asp-action="min" type="button" class="sub btn btn-default"><i class="fa-solid fa-minus"></i></a>
-                            <input type="text" value="@item.ProductCount" />
-                            <a asp-controller="basket" asp-route-id="@item.Id" asp-action="plus" type="button" class="add btn btn-default"><i class="fa-solid fa-plus"></i></a>
-                        </td>
+                           <a data-id="@item.Id" class="sub btn btn-default minusitem"><i class="fa-solid fa-minus"></i></a>
+                            <span>@item.ProductCount</span>
+                            <a data-Id="@item.Id" class="add btn btn-default plusitem"><i class="fa-solid fa-plus"></i></a>
+                        </td>   
 
 
                         <td>
                             <div class="product-total text-left">
-                                <span class="total-amount">€@(item.Price*item.ProductCount)</span>
+                                <span  class="total-amount">$@(item.Price*item.ProductCount)</span>
                             </div>
                         </td>
 
@@ -111,7 +110,7 @@
                             <div class="product-delete">
                                 <a asp-controller="basket" asp-route-id="@item.Id" asp-action="removeItem"><i class="fa-solid fa-trash"></i></a>
                             </div>
-                            @*<a href="javascript:void(0)"><i class="fas fa-times"></i></a>*@
+                            
                         </td>
                     </tr> 
                          }
@@ -146,10 +145,8 @@
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOne">
                                     <div class="card-body">
                                         <form action="#">
-
                                             <input type="text" placeholder="Enter Your Coupon code">
                                             <a class="butn small" href="javascript:void(0)"><span>Apply Code</span></a>
-
                                         </form>
                                     </div>
                                 </div>
@@ -159,53 +156,27 @@
                                     <h5 class="mb-0">
                                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                             Calculate Shipping
-                                            <span class="cart-amount">
-                                                @if (@Model.Sum(p => p.Price * p.ProductCount) / 100 > 3)
-                                                {
-                                                    <span>€<span id=shippingCost>@(Model.Sum(p=>p.Price*p.ProductCount)/100)</span></span> 
-                                                }
-                                                 
-                                                else
-                                                {
-                                                 <span>€3</span>
-                                                }
-                                            </span>
+
+
+
                                         </button>
                                     </h5>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-6 offset-lg-1 col-md-7 offset-md-0">
+                    <div class="col-lg-5 offset-lg-2 col-md-6 offset-lg-0">
                         <table class="table cart-sub-total">
-
                             <tbody>
                                 <tr>
-                                    <th class="text-right no-padding-right text-uppercase">Subtotal</th>
-                                    <span id="subTotal" class="cart-amount">€@Model.Sum(p=>p.Price*p.ProductCount)</span>
+                                    <th class="text-right no-padding-right text-uppercase">Cart Subtotal</th>
+                                    <td class="text-uppercase text-right no-padding-right"><span id="product-total-price"> $@Model.Sum(p => p.Price * p.ProductCount)</span> </td>
+
                                 </tr>
-
-
-
                                 <tr>
                                     <th class="text-right no-padding-right text-uppercase">Shipping and Handling</th>
-                                    <span class="cart-amount">
-
-
-                                        @if (@Model.Sum(p => p.Price * p.ProductCount) / 100 > 3)
-                                        {
-                                         <span>€<span id=shippingCost>@(Model.Sum(p=>p.Price*p.ProductCount)/100)</span></span>
-                                         
-                                        }
-
-                                        else
-
-                                        {
-                                        <span>€3</span>
-                                        }
+                                    <td class="text-uppercase text-right no-padding-right">$3</td>
                                 </tr>
-
                                 <tr>
                                     <td class="no-padding-right xs-no-padding" colspan="2">
                                         <hr>
@@ -216,14 +187,12 @@
                                     <td class="text-uppercase text-right no-padding-right xs-no-padding">
                                         @if (@Model.Sum(p => p.Price * p.ProductCount) / 100 > 3)
                                         {
-                                            <span>€<span id="totalSumPlus3">@(Model.Sum(p=>p.Price*p.ProductCount)+(Model.Sum(p=>p.Price*p.ProductCount)/100))</span></span> 
-                                         }
-                                                
+                            <span>$<span id="totalSumPlus3">@(Model.Sum(p=>p.Price*p.ProductCount)+(Model.Sum(p=>p.Price*p.ProductCount)/100))</span></span> }
+
                                         else
                                         {
-                                        <span>€<span id="totalSumPlusMax">@(Model.Sum(p=>p.Price*p.ProductCount)+3)</span></span>
-                                         }
-                                 </td>
+                            <span>$<span id="totalSumPlusMax">@(Model.Sum(p=>p.Price*p.ProductCount)+3)</span></span>}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="no-padding-right xs-no-padding" colspan="2">
@@ -232,7 +201,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <a class="butn medium secondary float-right" "main-btn"asp-action="checkout"><span>Proceed to Checkout</span></a>
+                        <a class="butn medium secondary float-right" asp-action="index" asp-controller="order"><span>Proceed to Checkout</span></a>
                     </div>
                 </div>
             </div>

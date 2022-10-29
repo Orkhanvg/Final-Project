@@ -13,5 +13,6 @@ namespace Final_Project.ViewModels
         public List<Brand> Brands { get; set; }
         public Product Product { get; set; }
         public AppUser User { get; set; }
+        
     }
 }

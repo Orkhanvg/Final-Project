@@ -20,6 +20,9 @@ namespace Final_Project.ViewModels
         public Product ProductDetail { get; set; }
         public  List<Blog> Blogs{ get; set; }
         public List<Team> Teams{ get; set; }
+        public List <Gallery> Galleries{ get; set; }
+
+
 
     }
 }

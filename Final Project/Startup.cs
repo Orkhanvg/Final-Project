@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +31,24 @@ namespace Final_Project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+            })
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/account/googlelogin";
+                })
+                .AddGoogle(options =>
+                {
+                    options.ClientId = "255164564537-2h31qm4elk3outgv33g61bdo3nuh77sd.apps.googleusercontent.com";
+                    options.ClientSecret = "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";
+                });
+
             services.AddControllersWithViews();
             services.AddScoped<ICategory, CategoryService>();
+            
             services.AddDbContext<AppDbContext>(option =>
             {
                 option.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
@@ -55,6 +74,8 @@ namespace Final_Project
                 opt.Lockout.AllowedForNewUsers = true;
 
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,8 +95,8 @@ namespace Final_Project
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
-
+            app.UseSession();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

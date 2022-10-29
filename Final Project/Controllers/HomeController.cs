@@ -1,29 +1,45 @@
 ﻿using Final_Project.DAL;
 using Final_Project.Models;
 using Final_Project.ViewModels;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Final_Project.Controllers
 {
     [Authorize]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
-        public readonly AppDbContext _context;
+        private readonly AppDbContext _context;
+       
+
 
         public HomeController (AppDbContext context)
         {
             _context = context;
+          
         }
        
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
             var products = await _context.Products.Include(p => p.ProductImages).ToListAsync();
+            if (id!=0)
+            {
+                products = await _context.Products.Include(p => p.ProductImages).Where(p => p.CategoryId == id).ToListAsync();
+
+            }
+          
+                
+            
+           
             HomeVM homeVM = new HomeVM();
             homeVM.SliderContents = await _context.SliderContents.Include(s => s.Slider).ToListAsync();
             homeVM.Banners = await _context.Banners.ToListAsync();
@@ -43,11 +59,13 @@ namespace Final_Project.Controllers
             ViewBag.newProduct = newProduct;
             ViewBag.isFeatured = isFeatured;
             ViewBag.bestSeller = bestSeller;
+            homeVM.Galleries = await _context.Galleries.ToListAsync();
             return View(homeVM);
         }
 
+    
 
-       
+
 
         private int PageCount(int take)
         {
@@ -70,5 +88,23 @@ namespace Final_Project.Controllers
             homeVM.Products = _context.Products.Where(p => p.IsDeleted != true).Include(i => i.ProductImages).ToList();
             return View(homeVM);
         }
+
+        public IActionResult Search(string search)
+    {
+
+
+            List<Product> products = _context.Products
+
+           .Where(p => p.Name.ToLower().Contains(search.ToLower()) || p.Desc.ToLower().Contains(search.ToLower())).Take(5).ToList();
+            if (products == null)
+            {
+                return RedirectToAction("error", "home");
+            }
+
+
+            return PartialView("_Search", products);
+        }
+
+       
     }
 }

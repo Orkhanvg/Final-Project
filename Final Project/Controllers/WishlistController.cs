@@ -31,10 +31,11 @@ namespace Final_Project.Controllers
             return View(wishLists);
         }
 
+        [HttpPost]
         public ActionResult Additem(int id)
         {
 
-
+            
             if (!User.Identity.IsAuthenticated) return BadRequest();
 
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);

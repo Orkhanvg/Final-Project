@@ -21,7 +21,9 @@ namespace Final_Project.Controllers
             _context = context;
         }
 
-        public IActionResult Index(int page = 1, int take = 12)
+       
+
+        public IActionResult Index(int page = 1, int take = 3)
         {
 
             List<Product> product = _context.Products.Where(p => p.IsDeleted != true)
@@ -36,5 +38,8 @@ namespace Final_Project.Controllers
             List<Product> products = _context.Products.Where(p => p.IsDeleted != true).ToList();
             return (int)Math.Ceiling((decimal)products.Count() / take);
         }
+
+
+
     }
 }

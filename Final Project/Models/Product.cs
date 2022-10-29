@@ -10,6 +10,7 @@ namespace Final_Project.Models
     public class Product:BaseIdentity
     {
         public string ProductCode { get; set; }
+        public int ProductCount { get; set; }
         public bool IsFeatured { get; set; }
         public bool BestSeller { get; set; }
         public bool NewArrival { get; set; }
@@ -41,6 +42,7 @@ namespace Final_Project.Models
         public List<ProductTags> ProductTags { get; set; }
         public List<OrderItem> OrderItems { get; set; }
         public List<BasketItem> BasketItems { get; set; }
+        
 
     }
 }

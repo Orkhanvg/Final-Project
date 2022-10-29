@@ -1,30 +1,35 @@
 ﻿@model Subscriber
-<div class="col-lg-5 col-sm-6 col-12">
+<div >
     <h3>About</h3>
     <p class="margin-30px-bottom">Etiam rhoncu sit amet adip scing simply thin sed ipsum dolor sit amet adip dine scing not avilable in the martket lorem ipsum sem neque.</p>
     <div class="newsletter">
-        <input type="email" asp-for="Email" placeholder="Enter your email...">
-        <a class="butn subscribe" asp-controller="subscribe" asp-action="form"><span>Subscribe</span></a>
+        <input type="email" id="email" placeholder="Enter your email...">
+        <a class="butn subscribe"  href="#"  id="send"><span>Subscribe</span></a>
     </div>
 </div>
 
 
 <script>
     let Btn = document.getElementById("send")
-    let email = document.getElementById("email")
+
     Btn.onclick = function (ev) {
         ev.preventDefault();
-        console.log(email.value)
+        let email = document.getElementById("email").value
+        console.log(email)
+        let body = { email: email }
 
-        var body = {
-            Email: email.value
-        }
 
-        axios({
-            method: 'post',
-            url: '/subscribe/form',
-            data: body
-        })
+        const formData = new FormData();
+        formData.append("email", email);
+
+        //axios({
+        //    method: 'post',
+        //    url: '/subscribe/form',
+        //    data: 
+        //})
+
+        axios.post("/subscribe/form?email=" + email)
+
             .then(function (response) {
                 swal({
                     title: "Thanks for Subscription !",

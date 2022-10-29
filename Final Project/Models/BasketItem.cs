@@ -12,5 +12,7 @@ namespace Final_Project.Models
         public Product Product { get; set; }
         public string UserId { get; set; }
         public AppUser AppUser { get; set; }
+        public double Total { get; set; }
+        public int Count { get; set; }
     }
 }

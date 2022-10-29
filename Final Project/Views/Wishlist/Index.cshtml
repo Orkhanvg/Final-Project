@@ -23,7 +23,7 @@
                                     <tr>
                                         <td>
                                             <div class="product-image" style="text-align: center">
-                                                <img width="100" height="100" src="~/img/shop/@item.Product.ProductImages.Find(x=> x.IsMain == true).ImageUrl" alt="cart">
+                                                <img width="100" height="100" src="~/assets/img/shop/@item.Product.ProductImages.Find(x=> x.IsMain == true).ImageUrl" alt="cart">
                                             </div>
                                         </td>
                                         <td>
@@ -38,8 +38,8 @@
                                         </td>
                                         <td>
                                             <div class="product-delete">
-                                                <a asp-controller="basket" asp-action="additem" asp-route-id="@item.Product.Id"><i class="icon ion-bag"></i></a>
-                                                <a asp-controller="wishlist" asp-action="remove" asp-route-id="@item.Product.Id"><i class="fal fa-trash-alt"></i></a>
+                                                <a asp-controller="basket" asp-action="additem" asp-route-id="@item.Product.Id"><i class="fa-solid fa-bag-shopping"></i></a>
+                                                <a asp-controller="wishlist" asp-action="remove" asp-route-id="@item.Product.Id"><i class="fa-solid fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>

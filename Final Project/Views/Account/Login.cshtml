@@ -19,10 +19,13 @@
         <label>
             <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>
-         <div class="custom-checkbox mt-80">
-        <label for="account"></label>
-         <p class="mt-lg-n4">No account? <a asp-action="Register">Create a new account.</a></p>
-    </div>
+        <div class="custom-checkbox mt-80">
+            <label for="account"></label>
+            <p class="mt-lg-n4">No account? <a asp-action="Register">Create a new account.</a></p>
+
+            <a asp-action="googlelogin" asp-for="google" > google </a>
+            
+        </div>
     </div>
 
     @*<div class="container">

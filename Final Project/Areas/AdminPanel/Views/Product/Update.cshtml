@@ -54,7 +54,7 @@
                     </div>
                   </div>
 
-                 @*  <div class="row">
+                 <div class="row">
                     <div class="col-sm-6">
                   <div class="form-check">
                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
@@ -63,7 +63,7 @@
                            {
                              if (item.IsMain)
                           {
-                            <img src="~/assets/images/product/@item.ImageUrl" width="100%" class="img-fluid col-4" alt="...">
+                            <img src="~/assets/img/product/@item.ImageUrl" width="100%" class="img-fluid col-4" alt="...">
                             <span>Profile Photo</span>
                           }
                          }
@@ -82,7 +82,7 @@
                           }
                          }
                     </div>
-                    </div>*@
+                    </div>
 
                    <div class="row">
                     <div class="col-sm-3">
@@ -119,23 +119,23 @@
                     <div class="row">
                     <div class="col-sm-2">
                       <!-- select -->
-                      <div class="form-group">
+                      <!--<div class="form-group">
                         <label class="text-default" asp-for="Category"></label>
                         <select id="select" asp-for="CategoryId" asp-items="@ViewBag.mainCategories" class="custom-select">
                         </select>
                         <span  class="text-danger" asp-validation-for="@Model.CategoryId"></span>
-                      </div>
+                      </div>-->
                     </div>
                    </div>
                     <div class="row">
                     <div class="col-sm-2">
                       <!-- select -->
-                      <div class="form-group">
+                      @*<div class="form-group">
                         <label class="text-default">SubCategory</label>
                         <select id="subCat" asp-for="OwnCategory" disabled  class="custom-select">
                             <option selected> Select</option>
                         </select>
-                      </div>
+                      </div>*@
                     </div>
                    </div>
                  

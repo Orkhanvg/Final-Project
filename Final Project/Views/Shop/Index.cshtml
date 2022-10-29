@@ -18,14 +18,14 @@
                         <div class="widget-title">
                             <h6>Categories</h6>
                         </div>
+                   
                         <ul class="list-style3">
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Care</a></li>
-                            <li><a href="#">Clothing</a></li>
-                            <li><a href="#">Decor</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Others</a></li>
-                            <li><a href="#">Uncategorized</a></li>
+                            <li><a id="All_BTN" href="#">All</a></li>
+                            <li><a id="Accessories_BTN" href="#">Accessories</a></li>
+                            <li><a id="Care_BTN" href="#">Care</a></li>
+                            <li><a id="Clothing_BTN" href="#">Clothing</a></li>
+                            <li><a id="Decor_BTN" href="#">Decor</a></li>
+                            <li><a id="Food_BTN" href="#">Food</a></li>
                         </ul>
                     </div>
                     <div class="widget">
@@ -34,13 +34,13 @@
                         </div>
 
                         <div class="media border-bottom margin-15px-bottom padding-15px-bottom">
-                            <img src="img/shop/09.jpg" class="mr-3 border-radius-5" alt="...">
+                            <img src="~/assets/img/shop/09.jpg" class="mr-3 border-radius-5" alt="...">
                             <div class="media-body">
                                 <h5 class="mt-0 font-size16 no-margin-bottom"><a href="javascript:void(0);" class="text-extra-dark-gray">Meats biscuits</a></h5> $599
                             </div>
                         </div>
                         <div class="media border-bottom margin-15px-bottom padding-15px-bottom">
-                            <img src="img/shop/10.jpg" class="mr-3 border-radius-5" alt="...">
+                            <img src="~/assets/img/shop/10.jpg" class="mr-3 border-radius-5" alt="...">
                             <div class="media-body">
                                 <h5 class="mt-0 font-size16 no-margin-bottom"><a href="javascript:void(0);" class="text-extra-dark-gray">Dog toys</a></h5> $100
                             </div>
@@ -63,7 +63,7 @@
                             <a href="#">Toys</a>
                             <a href="#">Tools</a>
                             <a href="#">Nurture</a>
-                            <a href="#">Food</a>
+                            <a href="">Food</a>
                         </div>
                     </div>
                 </div>
@@ -110,40 +110,28 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row margin-50px-bottom sm-margin-30px-bottom">
+                <div id="All" class="row margin-50px-bottom sm-margin-30px-bottom">
                     @foreach (var item in Model.Items)
                     {
-
-
-
             <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
                 <div class="product-pet">
                     <div class="position-relative">
-                        @foreach (var image in item.ProductImages)
-                        {
-                            if (image.IsMain)
-                            {
-                            <img width="200" height="220" class="first-image" src="~/assets/img/shop/@image.ImageUrl" alt="product"> 
-                            }
-                                else
-                                {
-                                    <img width="200" height="220" class="second-image" src="~/assets/img/shop/@image.ImageUrl" alt="product">
-                                }
 
 
-                            }
-                    <div class="product-cart">
-                        <a asp-controller="wishlist" asp-action="additem" asp-route-id="@Model.Items.FirstOrDefault().Id">
-                            <i class="far fa-heart"></i>
-                        </a>
-                        <a asp-controller="basket" asp-action="additem" asp-route-id="@Model.Items.FirstOrDefault().Id">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                    </div>
+                        <img width="200" height="220" class="first-image" src="~/assets/img/shop/@item.ProductImages.FirstOrDefault().ImageUrl" alt="product">
+
+
+                        <div class="product-cart">
+                            <a class="wishlist" data-Id="@item.Id">
+                                <i class="far fa-heart"></i>
+                            </a>
+                            <a class="product-cart2" data-id="@item.Id">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="padding-20px-top text-center">
-                        <h5 class="margin-5px-bottom font-weight-800"><a href="#" class="font-size26 text-extra-dark-gray">@item.Name</a></h5>
+                        <h5 class="margin-5px-bottom font-weight-800"><a asp-controller="home" asp-action="detail" asp-route-id="@item.Id" class="font-size26 text-extra-dark-gray">@item.Name</a></h5>
                         <div class="text-secondary-color">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -156,29 +144,246 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            }
-                </div>
+            </div>}
 
-                <div class="row">
-                    <div class="col-12 no-padding sm-padding-15px-lr">
-                        <div class="pagination text-small text-uppercase text-extra-dark-gray">
-                            <ul>
-                                <li><a href="javascript:void(0);"><i class="fas fa-long-arrow-alt-left margin-5px-right xs-display-none"></i> Prev</a></li>
-                                <li class="active"><a href="javascript:void(0);">1</a></li>
-                                <li><a href="javascript:void(0);">2</a></li>
-                                <li><a href="javascript:void(0);">3</a></li>
-                                <li><a href="javascript:void(0);">Next <i class="fas fa-long-arrow-alt-right margin-5px-left xs-display-none"></i></a></li>
-                            </ul>
+                </div>
+                <div id="Accessories" class="row margin-50px-bottom sm-margin-30px-bottom d-none">
+                    @foreach (var item in Model.Items.Where(c => c.Category.Name == "Accessories").ToList())
+                    {
+            <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
+                <div class="product-pet">
+                    <div class="position-relative">
+
+
+                        <img width="200" height="220" class="first-image" src="~/assets/img/shop/@item.ProductImages.FirstOrDefault().ImageUrl" alt="product">
+
+
+                        <div class="product-cart">
+                            <a class="wishlist" data-Id="@item.Id">
+                                <i class="far fa-heart"></i>
+                            </a>
+                            <a class="product-cart2" data-id="@item.Id">
+                                <i class="fas fa-shopping-cart "></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="padding-20px-top text-center">
+                        <h5 class="margin-5px-bottom font-weight-800"><a asp-controller="home" asp-action="detail" asp-route-id="@item.Id" class="font-size26 text-extra-dark-gray">@item.Name</a></h5>
+                        <div class="text-secondary-color">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div>
+                            <span class="font-weight-700">$@item.Price</span>
                         </div>
                     </div>
                 </div>
-                <ul class="pagination justify-content-center mt-30">
-                    @for (var i = 1; i <= Model.PageCount; i++)
+            </div>            }
+
+                </div>
+                <div id="Care" class="row margin-50px-bottom sm-margin-30px-bottom d-none">
+                    @foreach (var item in Model.Items)
                     {
-                    <li class=" @(Model.CurrentPage==i?"active":"")"><a asp-action="shop" asp-route-page="@i">@i</a></li>}
-                </ul>
+            <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
+                <div class="product-pet">
+                    <div class="position-relative">
+
+
+                        <img width="200" height="220" class="first-image" src="~/assets/img/shop/@item.ProductImages.FirstOrDefault().ImageUrl" alt="product">
+
+
+                        <div class="product-cart">
+                            <a class="wishlist" data-Id="@item.Id">
+                                <i class="far fa-heart"></i>
+                            </a>
+                            <a class="product-cart2" data-id="@item.Id">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="padding-20px-top text-center">
+                        <h5 class="margin-5px-bottom font-weight-800"><a asp-controller="home" asp-action="detail" asp-route-id="@item.Id" class="font-size26 text-extra-dark-gray">@item.Name</a></h5>
+                        <div class="text-secondary-color">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div>
+                            <span class="font-weight-700">$@item.Price</span>
+                        </div>
+                    </div>
+                </div>
+            </div>}
+
+                </div>
+                <div id="Clothing" class="row margin-50px-bottom sm-margin-30px-bottom d-none">
+                    @foreach (var item in Model.Items)
+                    {
+            <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
+                <div class="product-pet">
+                    <div class="position-relative">
+
+
+                        <img width="200" height="220" class="first-image" src="~/assets/img/shop/@item.ProductImages.FirstOrDefault().ImageUrl" alt="product">
+
+
+                        <div class="product-cart">
+                            <a class="wishlist" data-Id="@item.Id">
+                                <i class="far fa-heart"></i>
+                            </a>
+                            <a class="product-cart2" data-id="@item.Id">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="padding-20px-top text-center">
+                        <h5 class="margin-5px-bottom font-weight-800"><a asp-controller="home" asp-action="detail" asp-route-id="@item.Id" class="font-size26 text-extra-dark-gray">@item.Name</a></h5>
+                        <div class="text-secondary-color">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div>
+                            <span class="font-weight-700">$@item.Price</span>
+                        </div>
+                    </div>
+                </div>
+            </div>}
+
+                </div>
+                <div id="Decor" class="row margin-50px-bottom sm-margin-30px-bottom d-none">
+                    @foreach (var item in Model.Items)
+                    {
+            <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
+                <div class="product-pet">
+                    <div class="position-relative">
+
+
+                        <img width="200" height="220" class="first-image" src="~/assets/img/shop/@item.ProductImages.FirstOrDefault().ImageUrl" alt="product">
+
+
+                        <div class="product-cart">
+                            <a class="wishlist" data-Id="@item.Id">
+                                <i class="far fa-heart"></i>
+                            </a>
+                        </div>data-id="@item.Id">
+                        <i class="fas fa-shopping-cart"></i>
+
+                    </div>
+                </div>
+                <div class="padding-20px-top text-center">
+                    <h5 class="margin-5px-bottom font-weight-800"><a asp-controller="home" asp-action="detail" asp-route-id="@item.Id" class="font-size26 text-extra-dark-gray">@item.Name</a></h5>
+                    <div class="text-secondary-color">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div>
+                        <span class="font-weight-700">$@item.Price</span>
+                    </div>
+                </div>
             </div>
+                        
+                        }
+                </div>
+                    <div id="Food" class="row margin-50px-bottom sm-margin-30px-bottom d-none">
+                        @foreach (var item2 in Model.Items)
+                        {
+            <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
+                <div class="product-pet">
+                    <div class="position-relative">
+
+
+                        <img width="200" height="220" class="first-image" src="~/assets/img/shop/@item2.ProductImages.FirstOrDefault().ImageUrl" alt="product">
+
+
+                        <div class="product-cart">
+                            <a class="wishlist" data-Id="@item2.Id">
+                                <i class="far fa-heart"></i>
+                            </a>
+                            <a class="product-cart2" data-id="@item2.Id">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="padding-20px-top text-center">
+                        <h5 class="margin-5px-bottom font-weight-800"><a asp-controller="home" asp-action="detail" asp-route-id="@item2.Id" class="font-size26 text-extra-dark-gray">@item2.Name</a></h5>
+                        <div class="text-secondary-color">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div>
+                            <span class="font-weight-700">$@item2.Price</span>
+                        </div>
+                    </div>
+                </div>
+            </div>}
+
+
+
+                    </div>
+
+                    <div id="Food" class="row margin-50px-bottom sm-margin-30px-bottom d-none">
+                        @foreach (var item in Model.Items)
+                        {
+            <div class="col-xl-4 col-md-6 margin-30px-bottom sm-margin-20px-bottom">
+                <div class="product-pet">
+                    <div class="position-relative">
+
+
+                        <img width="200" height="220" class="first-image" src="~/assets/img/shop/@item.ProductImages.FirstOrDefault().ImageUrl" alt="product">
+
+
+                        <div class="product-cart">
+                            <a class="wishlist" data-Id="@item.Id">
+                                <i class="far fa-heart"></i>
+                            </a>
+                            <a class="product-cart2" data-id="@item.Id">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="padding-20px-top text-center">
+                        <h5 class="margin-5px-bottom font-weight-800"><a asp-controller="home" asp-action="detail" asp-route-id="@item.Id" class="font-size26 text-extra-dark-gray">@item.Name</a></h5>
+                        <div class="text-secondary-color">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div>
+                            <span class="font-weight-700">$@item.Price</span>
+                        </div>
+                    </div>
+                </div>
+            </div>            }
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 no-padding sm-padding-15px-lr">
+                            <ul class="pagination justify-content-center mt-30">
+                                @for (var i = 1; i <= Model.PageCount; i++)
+                                {
+                    <li class=" @(Model.CurrentPage==i?"active":"")"><a asp-controller="shop" asp-action="index" asp-route-page="@i">@i</a></li>}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
             <!-- end right panel section -->
 
         </div>

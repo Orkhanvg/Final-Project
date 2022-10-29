@@ -13,7 +13,5 @@ namespace Final_Project.ViewModels
         public string Ourteam { get; set; }
         public string About { get; set; }
 
-
-
     }
 }

@@ -2,6 +2,7 @@
 using Final_Project.DAL;
 using Final_Project.Models;
 using Final_Project.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Final_Project.Controllers
-{
+{ 
+    [Authorize]
     public class BasketController : Controller
     {
         private readonly AppDbContext _context;
@@ -94,7 +97,7 @@ namespace Final_Project.Controllers
             };
 
 
-            return RedirectToAction("index", "home");
+            return Ok(obj);
         }
         public IActionResult ShowItem()
         {
@@ -136,7 +139,11 @@ namespace Final_Project.Controllers
             }
             return View(products);
         }
-        public IActionResult min(int? id)
+
+
+
+
+        public IActionResult minusitem(int id)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -156,9 +163,28 @@ namespace Final_Project.Controllers
             }
             Response.Cookies.Append($"{userName}basket", JsonConvert.SerializeObject(products), new CookieOptions { MaxAge = TimeSpan.FromDays(5) });
 
-            return RedirectToAction("showitem", "basket");
+            int totalCount = 0;
+            double totalPrice = 0;
+            foreach (var item in products)
+            {
+                totalPrice += item.ProductCount * item.Price;
+                totalCount += item.ProductCount;
+            }
+            var obj = new
+            {
+                price = existProduct.Price,
+                productCount = existProduct.ProductCount,
+                TotalCount = totalCount,
+                TotalPrice = totalPrice
+            };
+            return Ok(obj);
         }
-        public IActionResult plus(int? id)
+
+
+
+
+       
+        public IActionResult plusitem(int id)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -171,7 +197,7 @@ namespace Final_Project.Controllers
             BasketVM existProduct = products.Find(p => p.Id == id);
             if (product.StockCount <= existProduct.ProductCount)
             {
-                TempData["failCount"] = $"{product.Name}-dan bazada cemisi {product.StockCount} eded var";
+                return Ok($"{product.Name}-dan bazada cemisi {product.StockCount} eded var");
             }
             else
             {
@@ -179,7 +205,22 @@ namespace Final_Project.Controllers
             }
             Response.Cookies.Append($"{userName}basket", JsonConvert.SerializeObject(products), new CookieOptions { MaxAge = TimeSpan.FromDays(5) });
             //return RedirectToAction("showitem", $"{userName}basket");
-            return RedirectToAction("showItem", "basket");
+            int totalCount = 0;
+            double totalPrice = 0;
+            foreach (var item in products)
+            {
+                totalPrice += item.ProductCount * item.Price;
+                totalCount += item.ProductCount;
+            }
+            var obj = new
+            {
+                price = existProduct.Price,
+                productCount = existProduct.ProductCount,
+                TotalCount = totalCount,
+                TotalPrice = totalPrice
+            };
+            return Ok(obj);
+
         }
         public IActionResult removeItem(int? id)
         {
@@ -304,6 +345,8 @@ namespace Final_Project.Controllers
             }
 
             return View();
+
+            
         }
     }
 }

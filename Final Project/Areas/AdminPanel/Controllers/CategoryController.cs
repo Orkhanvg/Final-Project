@@ -84,7 +84,7 @@ namespace Final_Project.Areas.AdminPanel.Controllers
                     ModelState.AddModelError("Image", "Size is higher max 1mb");
                     return View();
                 }
-                newCategory.ImageUrl = category.Image.SaveImage(_env, "assets/images");
+                newCategory.ImageUrl = category.Image.SaveImage(_env, "assets/img");
             }
             newCategory.Name = category.Name;
             newCategory.ParentId = category.ParentId;

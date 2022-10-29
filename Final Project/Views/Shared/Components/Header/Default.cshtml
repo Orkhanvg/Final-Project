@@ -1,221 +1,149 @@
 ﻿@model Bio
+
+
  <!-- start page loading -->
 @*<div id="preloader">
-    <div class="row loader">
-        <div class="loader-icon"></div>
-    </div>
-</div>*@
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>*@
 <!-- end page loading -->
-
-
 <!-- start main-wrapper section -->
 <div class="main-wrapper">
 
     <!-- start header section -->
     <header>
 
+
         <div id="top-bar" class="top-bar">
-            <div class="container lg-container">
+            <div class="container bootstrap-switch-container">
                 <div class="row">
                     <div class="col-md-9">
                         <div class="top-bar-info">
                             <ul>
-                                <li><i class="fas fa-phone"></i>(+994) 50 200 21 40</li>
-                                <li><i class="fas fa-envelope"></i>PawStore@paw.com</li>
-                                
+                                <li><a href="tel:+994 50 200 21 40"><i class="fas fa-phone"></i>(+994) 50 200 21 40</a></li>
+                                <li><a href="mailto:PawStore@paw.com"><i class="fas fa-envelope"></i>PawStore@paw.com</a></li>
+                           
+
                             </ul>
+
                         </div>
                     </div>
-                    <div class="col-xs-12 col-md-3 xs-display-none">
-                        <ul class="top-social-icon">
 
 
 
-                            @if (User.Identity.IsAuthenticated)
-                            {
+
+                    <div class="col-xs-12 col-md-3" style="height:40px">
+
+                        <ul class="top-social-icon " style="height:40px">
+                           
+                                @if (User.Identity.IsAuthenticated)
+                                {
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">@ViewBag.User</a>
-                                    @TempData["User Create Time"]
-
-                                    @TempData["Remaining Time"]
                                 </li>
-                                <li><a asp-controller="wishlist" asp-action="index"><i class="fa-solid fa-heart"></i></a></li>
+                                <li><a asp-controller="wishlist" asp-action="index"><i class="fa-solid fa-heart-circle-check"></i></a></li>
                             }
 
 
-                            <li class="nav-item my-auto shop-cart">
-                                <a asp-controller="basket" asp-action="showitem"> <i class="fas fa-shopping-bag"></i></a>
-                                <sup class="rounded-circle">@ViewBag.BasketCount</sup>
-                                <span>CART ($@ViewBag.TotalPrice)</span>
+                                <li class="nav-item my-auto shop-cart">
+                                    <a asp-controller="basket" asp-action="showitem"> <i class="fas fa-shopping-bag"></i></a>
+                                    <sup class="rounded-circle">@ViewBag.BasketCount</sup>
+                                    <span class="CART" ($@ViewBag.TotalPrice)></span>
+
+                                </li>
+
+                                @if (!User.Identity.IsAuthenticated)
+
+                                {
+
+                                    <li><a asp-controller="account" asp-action="login">Sign In</a></li>
+
+                                }
+
+                                else
+
+                                {
+                                    <li><a asp-controller="account" asp-action="logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                                }
+
+            
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        
+</div>
+
+<div class="navbar-default border-bottom border-color-light-white">
+
+
+
+    <div class="container lg-container">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-12">
+                <div class="menu_area alt-font">
+                    <nav class="navbar navbar-expand-lg navbar-light no-padding">
+
+                        <div class="navbar-header navbar-header-custom">
+                            <!-- start logo -->
+
+                            <a asp-action="Index" asp-controller="home"><img width="140px" src="~/assets/img/logos/logo.png" alt="logo"></a>
+
+                            <!-- end logo -->
+                        </div>
+
+                        <div class="navbar-toggler"></div>
+
+                        <!-- menu area -->
+
+                        <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
+                            <li>
+                                <a asp-controller="PetCare" asp-action="Index">Pet Care</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Shop" asp-action="Index">Shop</a>
 
                             </li>
-                            @*<li><a asp-controller="basket" asp-action="checkout">Checkout</a></li>*@
-                            @if (!User.Identity.IsAuthenticated)
 
-                            {
+                            <li>
 
-                                <li><a asp-controller="account" asp-action="login">Sign In</a></li>
+                                <a asp-controller="AboutUs">About Us</a>
 
-                            }
+                            </li>
 
-                            else
 
-                            {
-                                <li><a asp-controller="account" asp-action="logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
-                            }
+                            <li>
 
+                                <a  asp-controller="Blog">Blog</a>
+
+                            </li>
+
+                            <li><a asp-controller="Contact"> Contact Us</a></li>
                         </ul>
-                    </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="navbar-default border-bottom border-color-light-white">
+                        <form method="get" style="border:none; height:60px">
+                            <div class="form-group" style="width:180px; height:15px ">
+                                <ul class="search-wrapper" id="SearchList">
 
-            <!-- start top search -->
-            <div class="top-search bg-theme">
-                <div class="container lg-container">
-                    <form class="search-form" method="GET" accept-charset="utf-8">
-                        <select>
-                            <div class="input-group">
-                            <option value="0">All categories</option>
-                            @if (ViewBag.Categories.Count > 0)
-                            {
-                                @foreach (var item in ViewBag.Categories)
-                                {
-                                    if (item.ParentId == null)
-                                    {
-                                        <option>@item.Name</option>
-                                        @foreach (var child in item.Children)
-                                        {
-                                            if (child.IsDeleted != true)
-                                            {
-                                                <option>- - @child.Name</option>
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                        </select>
-                    </form>
-                    <span class="input-group-addon cursor-pointer">
-                        <button class="search-form_submit fas fa-search font-size18 text-white" type="submit"></button>
-                    </span>
-                    <input type="text" class="search-form_input form-control" name="s" autocomplete="off" placeholder="Type & hit enter...">
-                    <span class="input-group-addon close-search"><i class="fas fa-times font-size18 line-height-28 margin-5px-top"></i></span>
-                </div>
-            
-                </div>
-            </div>
-            <!-- end top search -->
-
-            <div class="container lg-container">
-                <div class="row align-items-center">
-                    <div class="col-12 col-lg-12">
-                        <div class="menu_area alt-font">
-                            <nav class="navbar navbar-expand-lg navbar-light no-padding">
-
-                                <div class="navbar-header navbar-header-custom">
-                                    <!-- start logo -->
-
-                                    <a asp-action="Index" class="navbar-brand"><img src="~/assets/img/logos/logo.png" alt="logo"></a>
-
-                                    <!-- end logo -->
-                                </div>
-
-                                <div class="navbar-toggler"></div>
-
-                                <!-- menu area -->
-
-                                <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
-                                    <li>
-                                    <a asp-controller="PetCare" asp-action="Index">Pet Care</a>
+                                    <li class="d-flex px-3">
+                                        <label for="Search"></label>
+                                        <input type="text" id="search" autocomplete="off" placeholder="&#xf002; Search" style="font-family:Arial, FontAwesome" class="form-control" name="search"
+                                               value="" />
                                     </li>
-                                    <li>
-                                         <a asp-controller="Shop"  asp-action="Index">Shop</a>
-
-                                    </li>
-
-                                    <li>
-
-                                    <a asp-controller="AboutUs">About Us</a>
-                                    
-                                    </li>
-
-
-                                    @*<li><a href="#">More</a>
-                                        <ul>
-                                            <li><a href="team.html">Our Team</a></li>
-                                            <li><a href="pricing-table.html">Pricing</a></li>
-                                            <li><a href="#">Portfolio</a>
-                                                <ul>
-                                                    <li><a href="portfolio.html">Portfolio style1</a></li>
-                                                    <li><a href="portfolio-style-2.html">Portfolio style2</a></li>
-                                                    <li><a href="portfolio-detail.html">Portfolio Detail</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="faq.html">FAQ</a></li>
-                                            <li><a href="404-page.html">404 Page</a></li>
-                                        </ul>
-                                    </li>*@
-                                    <li>
-
-                                        <a href="standard-blog-post.html">Blog</a>
-
-                                    </li>
-
-                                    <li><a asp-controller="Contact"> Contact Us</a></li>
                                 </ul>
-                                <!-- end menu area -->
-                                <!-- start atribute navigation -->
-                                <div class="attr-nav sm-no-margin sm-margin-70px-right xs-margin-65px-right">
-                                    @*<ul>
+                            </div>
+                        </form>
 
-                                        <li class="dropdown sm-margin-20px-right">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                <span class="badge bg-theme">3</span>
-                                                @if (ViewBag.Categories.Count > 0)
-                                                {
-                                                    @foreach (var item in ViewBag.Categories)
-                                                    {
-                                                        @if (item.ParentId == null)
-                                                        {
-                                                            <ul class="dropdown-menu cart-list">
-                                                                <li>
-                                                                    <a href="#" class="photo"><img src="~/assets/images/@item.ImageUrl" class="cart-thumb" alt="" /></a>
-                                                                    <h6><a href="#"> @item.Name</a></h6>
-                                                                    <p>2x - <span class="price"> @item.Price</span></p>
-                                                                </li>
-                                                                @foreach (var child in item.Children)
-                                                                {
-                                                                    if (child.IsDeleted != true)
-                                                                    {
-                                                                        <li style="width:max-content">
-                                                                            <a href="#"><span><b></b><span>-</span><b></b>@child.Name</span></a>
-                                                                        </li>
-}
-                                                                }
-                                                            </ul>
-
-                                                    <li class="search"><a href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
-                                                }
-                                                    }
-                                                }
-
-                                            </ul>*@
-                                </div>
-                                <!-- end atribute navigation -->
-
-                            </nav>
-                        </div>
-                    </div>
+                    </nav>
                 </div>
             </div>
         </div>
-
-    </header>
-    <!-- end header section -->
+    </div>
+</div>
+ </header>
+<!-- end header section -->

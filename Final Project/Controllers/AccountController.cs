@@ -2,17 +2,20 @@
 using Final_Project.Helpers;
 using Final_Project.Models;
 using Final_Project.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Final_Project.Controllers
-{
+{   [AllowAnonymous]
     public class AccountController : Controller
     {
         public readonly UserManager<AppUser> _userManager;
@@ -142,7 +145,7 @@ namespace Final_Project.Controllers
                         TempData["Banned"] = "Your account has been disabled";
                         return View(login);
                     }
-                    else if (appUser.EmailConfirmed == true && item.ToLower() == "Member")
+                    else if (appUser.EmailConfirmed == true && item.ToLower() == "member")
                     {
                         await _signInManager.SignInAsync(appUser, true);
                         return RedirectToAction("Index", "home");
@@ -237,5 +240,75 @@ namespace Final_Project.Controllers
             TempData["WrongPass"] = "Wrong Password";
             return View();
         }
+
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Login(string returnUrl)
+        //{
+        //    LoginVM model = new LoginVM
+        //    {
+        //        ReturnUrl = returnUrl,
+        //        ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+        //    };
+
+        //    return View(model);
+        //}
+
+        public IActionResult GoogleLogin(string ReturnUrl)
+        {
+            string redirectUrl = Url.Action("ExternalResponse", new { ReturnUrl = ReturnUrl });
+
+
+
+            AuthenticationProperties properties = _signInManager.ConfigureExternalAuthenticationProperties("Google", redirectUrl);
+           
+            return new ChallengeResult("Google", properties);
+          
+        }
+
+        public async Task<IActionResult> ExternalResponse(string ReturnUrl = "/")
+        {
+            ExternalLoginInfo loginInfo = await _signInManager.GetExternalLoginInfoAsync();
+           
+            if (loginInfo == null)
+                return RedirectToAction("Login");
+            else
+            {
+                Microsoft.AspNetCore.Identity.SignInResult loginResult = await _signInManager.ExternalLoginSignInAsync(loginInfo.LoginProvider, loginInfo.ProviderKey, true);
+                
+                if (loginResult.Succeeded)
+                    return Redirect(ReturnUrl);
+                else
+                {
+                 
+                    AppUser user = new AppUser
+                    {
+                        Email = loginInfo.Principal.FindFirst(ClaimTypes.Email).Value,
+                        UserName = loginInfo.Principal.FindFirst(ClaimTypes.GivenName).Value,
+                        LastName = loginInfo.Principal.FindFirst(ClaimTypes.Name).Value
+
+                    };
+                  
+                    IdentityResult createResult = await _userManager.CreateAsync(user);
+     
+                    if (createResult.Succeeded)
+                    {
+                       
+                        IdentityResult addLoginResult = await _userManager.AddLoginAsync(user, loginInfo);
+                       
+                        if (addLoginResult.Succeeded)
+                        {
+                            await _signInManager.SignInAsync(user, true);
+                            //await _signInManager.ExternalLoginSignInAsync(loginInfo.LoginProvider, loginInfo.ProviderKey, true);
+                            return Redirect(ReturnUrl);
+                        }
+                    }
+
+                }
+            }
+            return Redirect(ReturnUrl);
+        }
+
+
     }
 }

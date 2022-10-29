@@ -7,8 +7,10 @@ namespace Final_Project.ViewModels
 {
     public class ContactVM
     {
-        public string message { get; set; }
+        public string Message { get; set; }
 
-        public string Info { get; set; }
+        public string Name { get; set; }
+
+        public string Email { get; set; }
     }
 }
